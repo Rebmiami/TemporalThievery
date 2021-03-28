@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TemporalThievery
 {
@@ -22,6 +24,15 @@ namespace TemporalThievery
 
 		public string Theme { get; set; }
 
-		public Timeline[] Timelines { get; set; }
+		public List<Timeline> Timelines { get; set; }
+
+
+		public void Draw(SpriteBatch spriteBatch)
+		{
+			foreach (Timeline timeline in Timelines)
+			{
+				timeline.Draw(spriteBatch, new Vector2(50));
+			}
+		}
 	}
 }

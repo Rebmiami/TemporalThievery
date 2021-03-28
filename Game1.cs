@@ -1,13 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using System.Text.Json;
 
 namespace TemporalThievery
 {
 	public class Game1 : Game
 	{
 		private GraphicsDeviceManager _graphics;
-		private SpriteBatch _spriteBatch;
+		private SpriteBatch spriteBatch;
 
 		public Game1()
 		{
@@ -16,16 +18,26 @@ namespace TemporalThievery
 			IsMouseVisible = true;
 		}
 
+		public static Puzzle puzzle;
+
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
+			string json = File.ReadAllText(@".\Puzzles\Test.json");
+			puzzle = JsonSerializer.Deserialize<Puzzle>(json);
 
 			base.Initialize();
 		}
 
+		public static Texture2D GameTiles;
+		public static Texture2D HUDIcons;
+
 		protected override void LoadContent()
 		{
-			_spriteBatch = new SpriteBatch(GraphicsDevice);
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+
+			GameTiles = Content.Load<Texture2D>("GameTiles");
+			HUDIcons = Content.Load<Texture2D>("HUDIcons");
 
 			// TODO: use this.Content to load your game content here
 		}
@@ -44,7 +56,11 @@ namespace TemporalThievery
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp);
+
+			puzzle.Draw(spriteBatch);
+
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

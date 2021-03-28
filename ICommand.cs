@@ -6,8 +6,8 @@ namespace TemporalThievery
 {
 	public interface ICommand
 	{
-		public void Execute();
+		public void Execute(Puzzle puzzle);
 
-		public void Undo();
+		public void Undo(Puzzle puzzle);
 	}
 }
