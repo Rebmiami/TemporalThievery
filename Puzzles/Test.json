@@ -1,0 +1,25 @@
+{
+	"Name": "This Is A Test Puzzle",
+
+	"CashGoal": 0,
+	"MaxTimeline": 0,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Objects": [
+
+			],
+			"Layout": [
+				[ 0, 0, 0, 0, 0, 0 ],
+				[ 0, 0, 0, 0, 0, 0 ],
+				[ 0, 0, 0, 0, 0, 0 ],
+				[ 0, 0, 0, 0, 0, 0 ]
+			]
+		}
+	]
+}
