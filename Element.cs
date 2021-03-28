@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,14 +7,11 @@ namespace TemporalThievery
 {
 	public class Element
 	{
-		public string Type { get; set; }
+		public string Type;
+		public Vector2 Position;
 
-		public int[] Position { get; set; }
-
-		public int Channel { get; set; }
-
-		public bool Toggle { get; set; }
-
-		public int BindChannel { get; set; }
+		public int Channel;
+		public bool Toggle;
+		public int BindChannel;
 	}
 }

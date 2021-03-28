@@ -24,7 +24,8 @@ namespace TemporalThievery
 		{
 			// TODO: Add your initialization logic here
 			string json = File.ReadAllText(@".\Puzzles\Test.json");
-			puzzle = JsonSerializer.Deserialize<Puzzle>(json);
+			PuzzleLoader puzzleLoader = JsonSerializer.Deserialize<PuzzleLoader>(json);
+			puzzle = puzzleLoader.ToPuzzle();
 
 			base.Initialize();
 		}

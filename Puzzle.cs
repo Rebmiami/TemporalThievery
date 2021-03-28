@@ -8,24 +8,20 @@ namespace TemporalThievery
 {
 	public class Puzzle
 	{
-		public string Name { get; set; }
+		public string Name;
 
-		public int CashGoal { get; set; }
+		public int CashGoal;
+		public int MaxTimelines;
 
-		public int MaxTimelines { get; set; }
+		public int Jump;
+		public int Branch;
+		public int Kill;
+		public int Return;
 
-		public int Jump { get; set; }
+		public string Theme;
 
-		public int Branch { get; set; }
-
-		public int Kill { get; set; }
-
-		public int Return { get; set; }
-
-		public string Theme { get; set; }
-
-		public List<Timeline> Timelines { get; set; }
-
+		public List<Timeline> Timelines;
+		public Player Player;
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
