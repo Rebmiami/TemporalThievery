@@ -4,10 +4,10 @@ using System.Text;
 
 namespace TemporalThievery
 {
-	public class Timeline
+	public class Player
 	{
-		public List<Element> Elements { get; set; }
+		public int Timeline { get; set; }
 
-		public int[][] Layout { get; set; }
+		public int[] Position { get; set; }
 	}
 }

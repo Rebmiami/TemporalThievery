@@ -12,7 +12,13 @@
 	"Timelines": [
 		{
 			"Elements": [
-
+				{
+					"Type": "",
+					"Position": [ 0, 0 ],
+					"Channel": 0,
+					"Toggle": false,
+					"BindChannel": 0
+				}
 			],
 			"Layout": [
 				[ 0, 0, 0, 0, 0, 0 ],
@@ -21,5 +27,9 @@
 				[ 0, 0, 0, 0, 0, 0 ]
 			]
 		}
-	]
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 0, 0 ]
+	}
 }

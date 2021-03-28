@@ -4,10 +4,10 @@ using System.Text;
 
 namespace TemporalThievery
 {
-	public class Timeline
+	public interface ICommand
 	{
-		public List<Element> Elements { get; set; }
+		public void Execute();
 
-		public int[][] Layout { get; set; }
+		public void Undo();
 	}
 }
