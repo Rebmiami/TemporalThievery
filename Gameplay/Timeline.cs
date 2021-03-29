@@ -8,16 +8,27 @@ namespace TemporalThievery
 {
 	public class Timeline
 	{
+		/// <summary>
+		/// A list of elements on the timeline's board.
+		/// </summary>
 		public List<Element> Elements;
+
+		/// <summary>
+		/// The layout of the timeline's board, containing information on which tiles are solid.
+		/// </summary>
 		public int[,] Layout;
-		public Point dimensions;
+
+		/// <summary>
+		/// The dimensions of the board.
+		/// </summary>
+		public Point Dimensions;
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 origin)
 		{
-			for (int i = 0; i < dimensions.X; i++)
+			for (int i = 0; i < Dimensions.X; i++)
 			{
 				bool checker = i % 2 == 0;
-				for (int j = 0; j < dimensions.Y; j++)
+				for (int j = 0; j < Dimensions.Y; j++)
 				{
 					if (Layout[i, j] == 1)
 					{

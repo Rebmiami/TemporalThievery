@@ -7,7 +7,7 @@ namespace TemporalThievery.Commands
 {
 	class Move : ICommand
 	{
-		public Point playerMovement;
+		public Point PlayerMovement;
 
 		public void Execute(Puzzle puzzle)
 		{

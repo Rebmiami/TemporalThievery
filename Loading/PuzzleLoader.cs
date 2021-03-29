@@ -42,11 +42,11 @@ namespace TemporalThievery
 
 				public int[] Position { get; set; }
 
-				public int Channel { get; set; }
+				public byte Channel { get; set; }
 
 				public bool Toggle { get; set; }
 
-				public int BindChannel { get; set; }
+				public byte BindChannel { get; set; }
 
 
 				public Element ToElement()
@@ -74,16 +74,16 @@ namespace TemporalThievery
 					timeline.Elements.Add(element.ToElement());
 				}
 
-				timeline.dimensions = new Point();
-				timeline.dimensions.Y = Layout.Length;
+				timeline.Dimensions = new Point();
+				timeline.Dimensions.Y = Layout.Length;
 				foreach (int[] vs in Layout)
 				{
-					timeline.dimensions.X = Math.Max(timeline.dimensions.X, vs.Length);
+					timeline.Dimensions.X = Math.Max(timeline.Dimensions.X, vs.Length);
 				}
-				timeline.Layout = new int[timeline.dimensions.X, timeline.dimensions.Y];
-				for (int i = 0; i < timeline.dimensions.X; i++)
+				timeline.Layout = new int[timeline.Dimensions.X, timeline.Dimensions.Y];
+				for (int i = 0; i < timeline.Dimensions.X; i++)
 				{
-					for (int j = 0; j < timeline.dimensions.Y; j++)
+					for (int j = 0; j < timeline.Dimensions.Y; j++)
 					{
 						timeline.Layout[i, j] = Layout[j][i];
 					}
@@ -116,21 +116,21 @@ namespace TemporalThievery
 		{
 			var puzzle = new Puzzle
 			{
-				name = Name,
-				cashGoal = CashGoal,
-				maxTimelines = MaxTimelines,
-				jumps = Jump,
-				branches = Branch,
-				kills = Kill,
-				returns = Return,
-				theme = Theme,
-				player = Player.ToPlayer()
+				Name = Name,
+				CashGoal = CashGoal,
+				MaxTimelines = MaxTimelines,
+				Jumps = Jump,
+				Branches = Branch,
+				Kills = Kill,
+				Returns = Return,
+				Theme = Theme,
+				Player = Player.ToPlayer()
 			};
 
-			puzzle.timelines = new List<Timeline>();
+			puzzle.Timelines = new List<Timeline>();
 			foreach (TimelineLoader timeline in Timelines)
 			{
-				puzzle.timelines.Add(timeline.ToTimeline());
+				puzzle.Timelines.Add(timeline.ToTimeline());
 			}
 
 			return puzzle;
