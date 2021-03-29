@@ -8,27 +8,29 @@ namespace TemporalThievery
 {
 	public class Puzzle
 	{
-		public string Name;
+		public string name;
 
-		public int CashGoal;
-		public int MaxTimelines;
+		public int cashGoal;
+		public int maxTimelines;
 
-		public int Jump;
-		public int Branch;
-		public int Kill;
-		public int Return;
+		public int jumps;
+		public int branches;
+		public int kills;
+		public int returns;
 
-		public string Theme;
+		public string theme;
 
-		public List<Timeline> Timelines;
-		public Player Player;
+		public List<Timeline> timelines;
+		public Player player;
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			foreach (Timeline timeline in Timelines)
+			Vector2 origin = new Vector2(50);
+			foreach (Timeline timeline in timelines)
 			{
-				timeline.Draw(spriteBatch, new Vector2(50));
+				timeline.Draw(spriteBatch, origin);
 			}
+			spriteBatch.Draw(Game1.GameTiles, origin + new Vector2(player.Position.X * 8, player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
 		}
 	}
 }

@@ -116,21 +116,21 @@ namespace TemporalThievery
 		{
 			var puzzle = new Puzzle
 			{
-				Name = Name,
-				CashGoal = CashGoal,
-				MaxTimelines = MaxTimelines,
-				Jump = Jump,
-				Branch = Branch,
-				Kill = Kill,
-				Return = Return,
-				Theme = Theme,
-				Player = Player.ToPlayer()
+				name = Name,
+				cashGoal = CashGoal,
+				maxTimelines = MaxTimelines,
+				jumps = Jump,
+				branches = Branch,
+				kills = Kill,
+				returns = Return,
+				theme = Theme,
+				player = Player.ToPlayer()
 			};
 
-			puzzle.Timelines = new List<Timeline>();
+			puzzle.timelines = new List<Timeline>();
 			foreach (TimelineLoader timeline in Timelines)
 			{
-				puzzle.Timelines.Add(timeline.ToTimeline());
+				puzzle.timelines.Add(timeline.ToTimeline());
 			}
 
 			return puzzle;
