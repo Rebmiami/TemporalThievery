@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Text.Json;
+using TemporalThievery.Commands;
+using TemporalThievery.Input;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery
 {
@@ -19,6 +22,7 @@ namespace TemporalThievery
 		}
 
 		public static Puzzle puzzle;
+		public static CommandManager manager;
 
 		protected override void Initialize()
 		{
@@ -26,6 +30,7 @@ namespace TemporalThievery
 			string json = File.ReadAllText(@".\Puzzles\Test.json");
 			PuzzleLoader puzzleLoader = JsonSerializer.Deserialize<PuzzleLoader>(json);
 			puzzle = puzzleLoader.ToPuzzle();
+			manager = new CommandManager(puzzle);
 
 			base.Initialize();
 		}
@@ -48,7 +53,29 @@ namespace TemporalThievery
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
+			if (KeyHelper.Pressed(Keys.W))
+			{
+				manager.Execute(new MoveCommand(), (int)Directions.Up);
+			}
+			if (KeyHelper.Pressed(Keys.A))
+			{
+				manager.Execute(new MoveCommand(), (int)Directions.Left);
+			}
+			if (KeyHelper.Pressed(Keys.S))
+			{
+				manager.Execute(new MoveCommand(), (int)Directions.Down);
+			}
+			if (KeyHelper.Pressed(Keys.D))
+			{
+				manager.Execute(new MoveCommand(), (int)Directions.Right);
+			}
+
+			if (KeyHelper.Pressed(Keys.Z))
+			{
+				manager.Undo();
+			}
+
+			KeyHelper.Update();
 
 			base.Update(gameTime);
 		}

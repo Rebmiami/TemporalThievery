@@ -16,6 +16,12 @@ namespace TemporalThievery
 		/// </summary>
 		public Puzzle puzzle;
 
+		public CommandManager(Puzzle puzzle)
+		{
+			commands = new Stack<ICommand>();
+			this.puzzle = puzzle;
+		}
+
 		public void Execute(ICommand command, int arg)
 		{
 			command.Execute(puzzle, arg);
