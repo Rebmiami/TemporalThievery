@@ -13,10 +13,11 @@ namespace TemporalThievery
 		/// Executes the command on a given <see cref="Puzzle"/>.
 		/// </summary>
 		/// <param name="puzzle"></param>
-		public void Execute(Puzzle puzzle);
+		/// <param name="arg">The purpose of this argument depends on how the class implenting <see cref="ICommand"/> uses it.</param>
+		public void Execute(Puzzle puzzle, int arg);
 
 		/// <summary>
-		/// Undoes the action performed by calling <see cref="Execute(Puzzle)"/>.
+		/// Undoes the action performed by calling <see cref="Execute(Puzzle, int)"/>.
 		/// </summary>
 		/// <param name="puzzle"></param>
 		public void Undo(Puzzle puzzle);

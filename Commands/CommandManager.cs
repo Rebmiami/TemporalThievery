@@ -16,15 +16,16 @@ namespace TemporalThievery
 		/// </summary>
 		public Puzzle puzzle;
 
-		public void Execute(ICommand command)
+		public void Execute(ICommand command, int arg)
 		{
-			command.Execute(puzzle);
+			command.Execute(puzzle, arg);
 			commands.Push(command);
 		}
 
 		public void Undo()
 		{
-			commands.Pop().Undo(puzzle);
+			if (commands.Count > 0)
+				commands.Pop().Undo(puzzle);
 		}
 	}
 }

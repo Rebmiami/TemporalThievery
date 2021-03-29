@@ -15,6 +15,6 @@ namespace TemporalThievery
 		/// <summary>
 		/// The position of the player relative to the top-left corner of the board.
 		/// </summary>
-		public Vector2 Position;
+		public Point Position;
 	}
 }

@@ -105,7 +105,7 @@ namespace TemporalThievery
 				var player = new Player
 				{
 					Timeline = Timeline,
-					Position = new Vector2(Position[0], Position[1])
+					Position = new Point(Position[0], Position[1])
 				};
 				return player;
 			}

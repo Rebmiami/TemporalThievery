@@ -38,5 +38,10 @@ namespace TemporalThievery
 				}
 			}
 		}
+
+		public bool IsWalkable(Point point) => IsWalkable(point.X, point.Y);
+
+		public bool IsWalkable(int x, int y) => Layout[x, y] != 0;
+		// TODO: Expand this method to take into account other non-walkable elements, such as closed gates or safes pushed against a wall.
 	}
 }
