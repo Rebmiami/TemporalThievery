@@ -4,6 +4,14 @@ using System.Text;
 
 namespace TemporalThievery
 {
+	// Temporal Thievery uses a "command manager" system, in which all actions the player can take are called "commands".
+	// The "command manager" class keeps track of all commands the player has executed.
+	// All commands can be undone, so by going back down the list of commands, an "undo" feature can be implemented at relatively low cost.
+
+	/// <summary>
+	/// Keeps a <see cref="Stack{ICommand}"/> of <see cref="ICommand"/> actions.<br />
+	/// Executing the command pushes it to the stack. Undoing the command pops it from the stack.
+	/// </summary>
 	public class CommandManager
 	{
 		/// <summary>

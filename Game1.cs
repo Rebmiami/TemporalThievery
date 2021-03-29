@@ -53,6 +53,7 @@ namespace TemporalThievery
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
+			// Takes in player input and moves the player avatar accordingly.
 			if (KeyHelper.Pressed(Keys.W))
 			{
 				manager.Execute(new MoveCommand(), (int)Directions.Up);
@@ -82,6 +83,7 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
+			// TODO: Create a dedicated class for drawing timelines right
 			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
 			GraphicsDevice.SetRenderTarget(renderTarget);
 

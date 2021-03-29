@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 namespace TemporalThievery
 {
-    public class Puzzle
+	/// <summary>
+	/// Contains information on the current puzzle.
+	/// </summary>
+	public class Puzzle
 	{
 		/// <summary>
 		/// The external name of the puzzle shown to the player.

@@ -35,12 +35,12 @@ namespace TemporalThievery.Utils
 		}
 
 		public static void ShiftPoint(ref Point point, int direction)
-        {
+		{
 			point = ShiftPoint(point, direction);
-        }
+		}
 
 		public static Directions Invert(Directions direction)
-        {
+		{
 			return direction switch
 			{
 				Directions.Up => Directions.Down,
@@ -49,6 +49,6 @@ namespace TemporalThievery.Utils
 				Directions.Right => Directions.Left,
 				_ => throw new ArgumentException("The provided direction is not valid.")
 			};
-        }
+		}
 	}
 }

@@ -16,5 +16,7 @@ namespace TemporalThievery
 		/// The position of the player relative to the top-left corner of the board.
 		/// </summary>
 		public Point Position;
+
+		// As of now, code related to the movement of the player is located in Game1.cs under Update(GameTime gameTime).
 	}
 }
