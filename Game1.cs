@@ -82,13 +82,19 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
+			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
+			GraphicsDevice.SetRenderTarget(renderTarget);
+
 			GraphicsDevice.Clear(new Color(20, 20, 20));
+			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
+			puzzle.Draw(spriteBatch);
+			spriteBatch.End();
+			Program.game.GraphicsDevice.SetRenderTarget(null);
 
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-
-			puzzle.Draw(spriteBatch);
-
+			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0.0f);
 			spriteBatch.End();
+			renderTarget.Dispose();
 
 			base.Draw(gameTime);
 		}
