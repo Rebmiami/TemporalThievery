@@ -37,10 +37,30 @@ namespace TemporalThievery
 					checker = !checker;
 				}
 			}
+
+			foreach (Element element in Elements)
+			{
+				
+				spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+			}
 		}
 
+		// Points and pairs of ints are effectively the same thing.
+
+		/// <summary>
+		/// Returns the value of <see cref="IsWalkable(int, int)"/> using a <see cref="Point"/> instead of two integers.
+		/// </summary>
+		/// <param name="point"></param>
+		/// <returns></returns>
 		public bool IsWalkable(Point point) => IsWalkable(point.X, point.Y);
 
+		/// <summary>
+		/// Returns whether or not a given tile on the game board is "walkable". <br />
+		/// Unwalkable tiles cannot be traversed by the player under any circumstances.
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
 		public bool IsWalkable(int x, int y)
 		{
 			try
@@ -48,10 +68,51 @@ namespace TemporalThievery
 				return Layout[x, y] != 0;
 			}
 			catch (IndexOutOfRangeException)
-            {
+			{
 				return false;
-            }
+			}
 		}
-		// TODO: Expand this method to take into account other non-walkable elements, such as closed gates or safes pushed against a wall.
+
+		public bool IsWalkableOrPushable(Point point) => IsWalkableOrPushable(point.X, point.Y);
+
+		/// <summary>
+		/// Returns whether or not a given tile on the game board "could be navigable". <br />
+		/// All walkable and pushable tiles will return true.
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
+		public bool IsWalkableOrPushable(int x, int y)
+		{
+			return IsWalkable(x, y) || GetPushable(x, y) != null;
+		}
+
+		public bool IsUnwalkableOrPushable(Point point) => IsUnwalkableOrPushable(point.X, point.Y);
+
+		/// <summary>
+		/// Returns whether or not a given tile on the game board "could be innavigable". <br />
+		/// All unwalkable and pushable tiles will return true.
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <returns></returns>
+		public bool IsUnwalkableOrPushable(int x, int y)
+		{
+			return !IsWalkable(x, y) || GetPushable(x, y) != null;
+		}
+
+		public Element GetPushable(Point point)
+		{
+			foreach (Element element in Elements)
+			{
+				if (element.Position == point && element.Type == "Safe" || element.Type == "Anchor")
+				{
+					return element;
+				}
+			}
+			return null;
+		}
+
+		public Element GetPushable(int x, int y) => GetPushable(new Point(x, y));
 	}
 }

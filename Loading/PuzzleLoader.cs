@@ -54,7 +54,7 @@ namespace TemporalThievery
 					var element = new Element
 					{
 						Type = Type,
-						Position = new Vector2(Position[0], Position[1]),
+						Position = new Point(Position[0], Position[1]),
 						Channel = Channel,
 						Toggle = Toggle,
 						BindChannel = BindChannel

@@ -15,7 +15,7 @@ namespace TemporalThievery
 		/// <summary>
 		/// The position of the element relative to the top-left corner of the board.
 		/// </summary>
-		public Vector2 Position;
+		public Point Position;
 
 		/// <summary>
 		/// Channel number used for pads to open gates and codes to open code doors. <br />
@@ -33,5 +33,7 @@ namespace TemporalThievery
 		/// Can be applied to crates and pads. Crates and pads can safely share bind channels.
 		/// </summary>
 		public byte BindChannel;
+
+		// As of now, the behavior of objects is implemented in Timeline.cs, Puzzle.cs, and MoveCommand.cs.
 	}
 }
