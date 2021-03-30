@@ -14,10 +14,28 @@
 			"Elements": [
 				{
 					"Type": "Safe",
-					"Position": [ 1, 3 ],
-					"Channel": 0,
+					"Position": [ 1, 1 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 1, 0 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 3, 4 ],
 					"Toggle": false,
-					"BindChannel": 0
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 6, 4 ],
+					"Toggle": true,
+					"Channel": 0
+				},
+				{
+					"Type": "MoneyBag",
+					"Position": [ 8, 4 ]
 				}
 			],
 			"Layout": [

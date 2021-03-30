@@ -46,6 +46,8 @@ namespace TemporalThievery
 
 				public bool Toggle { get; set; }
 
+				public int Direction { get; set; }
+
 				public byte BindChannel { get; set; }
 
 
@@ -57,6 +59,7 @@ namespace TemporalThievery
 						Position = new Point(Position[0], Position[1]),
 						Channel = Channel,
 						Toggle = Toggle,
+						Direction = Direction,
 						BindChannel = BindChannel
 					};
 					return element;

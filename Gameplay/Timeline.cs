@@ -23,6 +23,16 @@ namespace TemporalThievery
 		/// </summary>
 		public Point Dimensions;
 
+		/// <summary>
+		/// All 256 channels used by pads and gates. Usually, no more than 5-10 will be used.
+		/// </summary>
+		public bool[] Channels;
+
+		public Timeline()
+		{
+			Channels = new bool[byte.MaxValue];
+		}
+
 		public void Draw(SpriteBatch spriteBatch, Vector2 origin)
 		{
 			for (int i = 0; i < Dimensions.X; i++)
@@ -40,8 +50,39 @@ namespace TemporalThievery
 
 			foreach (Element element in Elements)
 			{
-				
-				spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+				switch (element.Type)
+				{
+					case "Safe":
+						{
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+							break;
+						}
+
+					case "Pad":
+						{
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 0, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
+							break;
+						}
+
+					case "Gate":
+						{
+							bool open = Channels[element.Channel] ^ element.Toggle;
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * (open ? 2 : 1), 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							break;
+						}
+
+					case "MoneyBag":
+						{
+							bool open = Channels[element.Channel] ^ element.Toggle;
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							break;
+						}
+
+					default:
+						{
+							break;
+						}
+				}
 			}
 		}
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery
 {
@@ -27,6 +28,12 @@ namespace TemporalThievery
 		/// Exclusively used by gates to determine if they should be open or closed by default.
 		/// </summary>
 		public bool Toggle;
+
+		/// <summary>
+		/// Used by gates and code doors to determine what direction they should face and open. <br />
+		/// Uses the same directions as <see cref="Directions"/>.
+		/// </summary>
+		public int Direction;
 
 		/// <summary>
 		/// Channel number used for objects bound over timelines. <br />
