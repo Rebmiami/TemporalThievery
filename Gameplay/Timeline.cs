@@ -24,13 +24,65 @@ namespace TemporalThievery
 		public Point Dimensions;
 
 		/// <summary>
-		/// All 256 channels used by pads and gates. Usually, no more than 5-10 will be used.
+		/// All 256 channels used by pads and gates. Most puzzles will use between 0 and 5, but there is no hard limit below 256.
 		/// </summary>
 		public bool[] Channels;
 
 		public Timeline()
 		{
 			Channels = new bool[byte.MaxValue];
+		}
+
+		/// <summary>
+		/// After the player takes an action, <see cref="Refresh"/> is called to update the status of elements like pads and gates.
+		/// </summary>
+		public void Refresh()
+		{
+			// Clears all active channels.
+			for (int i = 0; i < Channels.Length; i++)
+			{
+				Channels[i] = false;
+			}
+
+			// Creates a list of all pads in the timeline.
+			// 
+			List<Element> pads = new List<Element>();
+			foreach (Element element in Elements)
+			{
+				if (element.Type == "Pad")
+				{
+					pads.Add(element);
+				}
+			}
+
+			// Checks for safes on top of pads.
+			foreach (Element element in Elements)
+			{
+				// Makes sure that only safes are considered.
+				// Should anchors also be considered?
+				if (element.Type == "Safe")
+					foreach (Element pad in pads)
+					{
+						// If the pad's channel is already active, there is no need to check again.
+						// This can only happen if there are multiple pads of the same channel present in the level.
+						if (Channels[pad.Channel])
+						{
+							continue;
+						}
+
+						// If the safe is on top of the pad, activate the pad's channel.
+						if (element.Position == pad.Position)
+						{
+							Channels[pad.Channel] = true;
+
+							if (pad.BindChannel != 0)
+							{
+								// TBA
+								// This will cause pads bound between timelines to activate simultaneously.
+							}
+						}
+					}
+			}
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2 origin)

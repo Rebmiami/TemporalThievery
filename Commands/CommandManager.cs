@@ -34,12 +34,14 @@ namespace TemporalThievery
 		{
 			command.Execute(puzzle, arg);
 			commands.Push(command);
+			puzzle.Refresh();
 		}
 
 		public void Undo()
 		{
 			if (commands.Count > 0)
 				commands.Pop().Undo(puzzle);
+			puzzle.Refresh();
 		}
 	}
 }
