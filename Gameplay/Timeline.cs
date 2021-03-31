@@ -158,6 +158,13 @@ namespace TemporalThievery
 		{
 			try
 			{
+				foreach (Element element in Elements)
+				{
+					if (element.Position == new Point(x, y) && element.Type == "Gate" && !Channels[element.Channel] ^ element.Toggle)
+					{
+						return false;
+					}
+				}
 				return Layout[x, y] != 0;
 			}
 			catch (IndexOutOfRangeException)
