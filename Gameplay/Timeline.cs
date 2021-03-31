@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TemporalThievery
 {
-	public class Timeline
+	public class Timeline : ICloneable
 	{
 		/// <summary>
 		/// A list of elements on the timeline's board.
@@ -214,5 +214,22 @@ namespace TemporalThievery
 		}
 
 		public Element GetPushable(int x, int y) => GetPushable(new Point(x, y));
+
+
+		public object Clone()
+		{
+			Timeline timeline = new Timeline
+			{
+				Elements = new List<Element>(),
+				Layout = Layout,
+				Dimensions = Dimensions,
+				Channels = Channels
+			};
+			foreach (Element element in Elements)
+            {
+				timeline.Elements.Add((Element)element.Clone());
+            }
+			return timeline;
+		}
 	}
 }

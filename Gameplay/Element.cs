@@ -6,7 +6,7 @@ using TemporalThievery.Utils;
 
 namespace TemporalThievery
 {
-	public class Element
+	public class Element : ICloneable
 	{
 		/// <summary>
 		/// The type of element represented by this object.
@@ -40,6 +40,19 @@ namespace TemporalThievery
 		/// Can be applied to crates and pads. Crates and pads can safely share bind channels.
 		/// </summary>
 		public byte BindChannel;
+
+		public object Clone()
+		{
+			return new Element
+			{
+				Type = Type,
+				Position = Position,
+				Channel = Channel,
+				Toggle = Toggle,
+				Direction = Direction,
+				BindChannel = BindChannel
+			};
+		}
 
 		// As of now, the behavior of objects is implemented in Timeline.cs, Puzzle.cs, and MoveCommand.cs.
 	}

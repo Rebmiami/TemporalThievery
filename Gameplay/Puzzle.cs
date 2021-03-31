@@ -65,16 +65,17 @@ namespace TemporalThievery
 			foreach (Timeline timeline in Timelines)
 			{
 				timeline.Draw(spriteBatch, origin);
+				origin.Y += timeline.Dimensions.Y * 8 + 16;
 			}
 			spriteBatch.Draw(Game1.GameTiles, origin + new Vector2(Player.Position.X * 8, Player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
 		}
 
 		public void Refresh()
-        {
+		{
 			foreach (Timeline timeline in Timelines)
-            {
+			{
 				timeline.Refresh();
-            }
-        }
+			}
+		}
 	}
 }
