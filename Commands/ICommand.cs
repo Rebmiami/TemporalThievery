@@ -14,7 +14,7 @@ namespace TemporalThievery
 		/// </summary>
 		/// <param name="puzzle"></param>
 		/// <param name="arg">The purpose of this argument depends on how the class implenting <see cref="ICommand"/> uses it.</param>
-		public void Execute(Puzzle puzzle, int arg);
+		public void Execute(Puzzle puzzle, int arg = 0);
 
 		/// <summary>
 		/// Undoes the action performed by calling <see cref="Execute(Puzzle, int)"/>.

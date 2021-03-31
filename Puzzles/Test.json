@@ -1,10 +1,10 @@
 {
 	"Name": "This Is A Test Puzzle",
 
-	"CashGoal": 0,
-	"MaxTimeline": 0,
-	"Jump": 0,
-	"Branch": 0,
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 1,
 	"Kill": 0,
 	"Return": 0,
 

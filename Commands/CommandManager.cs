@@ -30,7 +30,7 @@ namespace TemporalThievery
 			this.puzzle = puzzle;
 		}
 
-		public void Execute(ICommand command, int arg)
+		public void Execute(ICommand command, int arg = 0)
 		{
 			command.Execute(puzzle, arg);
 			commands.Push(command);

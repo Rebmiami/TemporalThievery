@@ -221,9 +221,9 @@ namespace TemporalThievery
 			Timeline timeline = new Timeline
 			{
 				Elements = new List<Element>(),
-				Layout = Layout,
+				Layout = (int[,])Layout.Clone(),
 				Dimensions = Dimensions,
-				Channels = Channels
+				Channels = (bool[])Channels.Clone()
 			};
 			foreach (Element element in Elements)
             {

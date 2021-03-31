@@ -6,14 +6,22 @@ namespace TemporalThievery.Commands
 {
 	public class BranchCommand : ICommand
 	{
-		public void Execute(Puzzle puzzle, int arg)
+		/// <summary>
+		/// The timeline created by the branch command.
+		/// </summary>
+		public Timeline CreatedTimeline;
+
+		public void Execute(Puzzle puzzle, int arg = 0)
 		{
-			throw new NotImplementedException();
+			CreatedTimeline = (Timeline)puzzle.Timelines[puzzle.Player.Timeline].Clone();
+			puzzle.Timelines.Add(CreatedTimeline);
+			puzzle.Branches--;
 		}
 
 		public void Undo(Puzzle puzzle)
 		{
-			throw new NotImplementedException();
+			puzzle.Timelines.Remove(CreatedTimeline);
+			puzzle.Branches++;
 		}
 	}
 }

@@ -70,6 +70,20 @@ namespace TemporalThievery
 			{
 				manager.Execute(new MoveCommand(), (int)Directions.Right);
 			}
+			if (KeyHelper.Pressed(Keys.D1))
+			{
+				if (puzzle.Jumps != 0)
+				{
+					manager.Execute(new JumpCommand());
+				}
+			}
+			if (KeyHelper.Pressed(Keys.D2))
+			{
+				if (puzzle.Branches != 0)
+				{
+					manager.Execute(new BranchCommand());
+				}
+			}
 
 			if (KeyHelper.Pressed(Keys.Z))
 			{
