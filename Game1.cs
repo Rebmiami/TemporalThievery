@@ -21,7 +21,7 @@ namespace TemporalThievery
 			IsMouseVisible = true;
 		}
 
-		public static Puzzle puzzle;
+		public static PuzzleState puzzle;
 		public static CommandManager manager;
 
 		protected override void Initialize()
@@ -97,7 +97,7 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
-			// TODO: Create a dedicated class for drawing timelines right
+			// TODO: Create a dedicated class for drawing timelines properly
 			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
 			GraphicsDevice.SetRenderTarget(renderTarget);
 

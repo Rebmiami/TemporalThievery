@@ -6,7 +6,7 @@ using System.Text;
 namespace TemporalThievery
 {
 	/// <summary>
-	/// A template for loading puzzles from JSON. Contains a method <see cref="ToPuzzle"/> to convert itself to a <see cref="Puzzle"/> in a format the game can use.
+	/// A template for loading puzzles from JSON. Contains a method <see cref="ToPuzzle"/> to convert itself to a <see cref="PuzzleState"/> in a format the game can use.
 	/// </summary>
 	public class PuzzleLoader
 	{
@@ -115,9 +115,9 @@ namespace TemporalThievery
 		}
 
 
-		public Puzzle ToPuzzle()
+		public PuzzleState ToPuzzle()
 		{
-			var puzzle = new Puzzle
+			var puzzle = new PuzzleState
 			{
 				Name = Name,
 				CashGoal = CashGoal,

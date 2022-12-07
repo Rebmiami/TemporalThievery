@@ -15,16 +15,16 @@ namespace TemporalThievery
 	public class CommandManager
 	{
 		/// <summary>
-		/// A stack of all <see cref="ICommand"/>s executed since the current <see cref="Puzzle"/> began.
+		/// A stack of all <see cref="ICommand"/>s executed since the current <see cref="PuzzleState"/> began.
 		/// </summary>
 		public Stack<ICommand> commands;
 
 		/// <summary>
-		/// Reference to the current <see cref="Puzzle"/> for <see cref="ICommand"/>s to act on.
+		/// Reference to the current <see cref="PuzzleState"/> for <see cref="ICommand"/>s to act on.
 		/// </summary>
-		public Puzzle puzzle;
+		public PuzzleState puzzle;
 
-		public CommandManager(Puzzle puzzle)
+		public CommandManager(PuzzleState puzzle)
 		{
 			commands = new Stack<ICommand>();
 			this.puzzle = puzzle;
@@ -35,6 +35,8 @@ namespace TemporalThievery
 			command.Execute(puzzle, arg);
 			commands.Push(command);
 			puzzle.Refresh();
+
+
 		}
 
 		public void Undo()

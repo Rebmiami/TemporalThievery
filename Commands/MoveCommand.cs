@@ -20,7 +20,7 @@ namespace TemporalThievery.Commands
 		/// </summary>
 		public Element Used = null;
 
-		public void Execute(Puzzle puzzle, int arg)
+		public void Execute(PuzzleState puzzle, int arg)
 		{
 			Point oldPosition = puzzle.Player.Position;
 			Point newPosition = DirectionHelper.ShiftPoint(oldPosition, arg);
@@ -61,7 +61,7 @@ namespace TemporalThievery.Commands
 		}
 
 
-		public void Undo(Puzzle puzzle)
+		public void Undo(PuzzleState puzzle)
 		{
 			puzzle.Player.Position.X -= PlayerMovement.X;
 			puzzle.Player.Position.Y -= PlayerMovement.Y;

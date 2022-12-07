@@ -11,14 +11,14 @@ namespace TemporalThievery.Commands
 		/// </summary>
 		public Timeline CreatedTimeline;
 
-		public void Execute(Puzzle puzzle, int arg = 0)
+		public void Execute(PuzzleState puzzle, int arg = 0)
 		{
 			CreatedTimeline = (Timeline)puzzle.Timelines[puzzle.Player.Timeline].Clone();
 			puzzle.Timelines.Add(CreatedTimeline);
 			puzzle.Branches--;
 		}
 
-		public void Undo(Puzzle puzzle)
+		public void Undo(PuzzleState puzzle)
 		{
 			puzzle.Timelines.Remove(CreatedTimeline);
 			puzzle.Branches++;

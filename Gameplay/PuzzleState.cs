@@ -7,7 +7,7 @@ namespace TemporalThievery
 	/// <summary>
 	/// Contains information on the current puzzle.
 	/// </summary>
-	public class Puzzle
+	public class PuzzleState
 	{
 		/// <summary>
 		/// The external name of the puzzle shown to the player.
@@ -81,6 +81,22 @@ namespace TemporalThievery
 			{
 				timeline.Refresh();
 			}
+		}
+
+		public PuzzleStateLegality GetLegality()
+		{
+
+
+			if (Timelines.Count == 0)
+			{
+				return PuzzleStateLegality.NoTimelines;
+			}
+			if (Timelines.Count > MaxTimelines)
+			{
+				return PuzzleStateLegality.TooManyTimelines;
+			}
+
+			return PuzzleStateLegality.Legal;
 		}
 	}
 }

@@ -10,16 +10,16 @@ namespace TemporalThievery
 	public interface ICommand
 	{
 		/// <summary>
-		/// Executes the command on a given <see cref="Puzzle"/>.
+		/// Executes the command on a given <see cref="PuzzleState"/>.
 		/// </summary>
 		/// <param name="puzzle"></param>
 		/// <param name="arg">The purpose of this argument depends on how the class implenting <see cref="ICommand"/> uses it.</param>
-		public void Execute(Puzzle puzzle, int arg = 0);
+		public void Execute(PuzzleState puzzle, int arg = 0);
 
 		/// <summary>
-		/// Undoes the action performed by calling <see cref="Execute(Puzzle, int)"/>.
+		/// Undoes the action performed by calling <see cref="Execute(PuzzleState, int)"/>.
 		/// </summary>
 		/// <param name="puzzle"></param>
-		public void Undo(Puzzle puzzle);
+		public void Undo(PuzzleState puzzle);
 	}
 }

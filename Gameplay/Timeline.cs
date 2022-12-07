@@ -58,8 +58,8 @@ namespace TemporalThievery
 			// Checks for safes on top of pads.
 			foreach (Element element in Elements)
 			{
-				// Makes sure that only safes are considered.
-				// Should anchors also be considered?
+				// Makes sure that only safes are checked.
+				// Should anchors also be checked?
 				if (element.Type == "Safe")
 					foreach (Element pad in pads)
 					{
