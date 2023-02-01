@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Commands.Deltas;
 
 namespace TemporalThievery.Commands
 {
-	public class BranchCommand : ICommand
+	public class BranchCommand : Command
 	{
-		/// <summary>
-		/// The timeline created by the branch command.
-		/// </summary>
-		public Timeline CreatedTimeline;
-
-		public void Execute(PuzzleState puzzle, int arg = 0)
+		public override void Execute(PuzzleState puzzle, int arg = 0)
 		{
-			CreatedTimeline = (Timeline)puzzle.Timelines[puzzle.Player.Timeline].Clone();
-			puzzle.Timelines.Add(CreatedTimeline);
+			deltas.Push(new BranchDelta(puzzle));
 			puzzle.Branches--;
+			base.Execute(puzzle, arg);
 		}
 
-		public void Undo(PuzzleState puzzle)
+		public override void Undo(PuzzleState puzzle)
 		{
-			puzzle.Timelines.Remove(CreatedTimeline);
+			base.Undo(puzzle);
 			puzzle.Branches++;
 		}
 	}

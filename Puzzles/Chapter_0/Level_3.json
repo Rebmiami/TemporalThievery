@@ -1,0 +1,40 @@
+{
+	"Name": "Parallel Processing",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 9, 1 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 ]
+			]
+		},
+		{
+			"Elements": [
+			],
+			"Layout": [
+				[ 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 ],
+				[ 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 ],
+				[ 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 1 ]
+	}
+}

@@ -27,10 +27,8 @@ namespace TemporalThievery
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
-			string json = File.ReadAllText(@".\Puzzles\Test.json");
-			PuzzleLoader puzzleLoader = JsonSerializer.Deserialize<PuzzleLoader>(json);
-			puzzle = puzzleLoader.ToPuzzle();
-			manager = new CommandManager(puzzle);
+
+			InitializePuzzleFromFilePath(@".\Puzzles\Chapter_0\Level_5.json");
 
 			base.Initialize();
 		}
@@ -48,10 +46,33 @@ namespace TemporalThievery
 			// TODO: use this.Content to load your game content here
 		}
 
+		public void InitializePuzzleFromFilePath(string path)
+		{
+			string json = File.ReadAllText(path);
+			PuzzleLoader puzzleLoader = JsonSerializer.Deserialize<PuzzleLoader>(json);
+			puzzle = puzzleLoader.ToPuzzle();
+			manager = new CommandManager(puzzle);
+		}
+
 		protected override void Update(GameTime gameTime)
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
+
+			for (int i = 0; i < 10; i++)
+			{
+				if (KeyHelper.Pressed(Keys.D1 + i))
+				{
+					string path = @".\Puzzles\Chapter_0\Level_" + i + ".json";        
+					if (File.Exists(path))
+					{
+						InitializePuzzleFromFilePath(path);
+					}
+				}
+			}
+
+
+
 
 			// Takes in player input and moves the player avatar accordingly.
 			if (KeyHelper.Pressed(Keys.W))
@@ -70,14 +91,14 @@ namespace TemporalThievery
 			{
 				manager.Execute(new MoveCommand(), (int)Directions.Right);
 			}
-			if (KeyHelper.Pressed(Keys.D1))
+			if (KeyHelper.Pressed(Keys.X))
 			{
 				if (puzzle.Jumps != 0)
 				{
 					manager.Execute(new JumpCommand());
 				}
 			}
-			if (KeyHelper.Pressed(Keys.D2))
+			if (KeyHelper.Pressed(Keys.C))
 			{
 				if (puzzle.Branches != 0)
 				{

@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Commands.Deltas;
 
 namespace TemporalThievery.Commands
 {
-	public class JumpCommand : ICommand
+	public class JumpCommand : Command
 	{
-		public void Execute(PuzzleState puzzle, int arg)
+		public override void Execute(PuzzleState puzzle, int arg)
 		{
-			puzzle.Player.Timeline++;
-			if (puzzle.Player.Timeline >= puzzle.Timelines.Count)
+			int timeline = puzzle.Player.Timeline + 1;
+			if (timeline >= puzzle.Timelines.Count)
             {
-				puzzle.Player.Timeline = 0;
-            }
+				timeline = 0;
+			}
+			deltas.Push(new PlayerDelta(puzzle, puzzle.Player.Position, timeline));
 			puzzle.Jumps--;
+			base.Execute(puzzle, arg);
 		}
 
-		public void Undo(PuzzleState puzzle)
+		public override void Undo(PuzzleState puzzle)
 		{
-			puzzle.Player.Timeline--;
-			if (puzzle.Player.Timeline < 0)
-			{
-				puzzle.Player.Timeline = puzzle.Timelines.Count - 1;
-			}
+			// puzzle.Player.Timeline--;
+			// if (puzzle.Player.Timeline < 0)
+			// {
+			// 	puzzle.Player.Timeline = puzzle.Timelines.Count - 1;
+			// }
 			puzzle.Jumps++;
+			base.Undo(puzzle);
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace TemporalThievery
 
 		public int CashGoal { get; set; }
 
-		public int MaxTimelines { get; set; }
+		public int MaxTimeline { get; set; }
 
 		public int Jump { get; set; }
 
@@ -121,7 +121,7 @@ namespace TemporalThievery
 			{
 				Name = Name,
 				CashGoal = CashGoal,
-				MaxTimelines = MaxTimelines,
+				MaxTimeline = MaxTimeline,
 				Jumps = Jump,
 				Branches = Branch,
 				Kills = Kill,

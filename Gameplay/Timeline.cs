@@ -15,6 +15,8 @@ namespace TemporalThievery
 
 		/// <summary>
 		/// The layout of the timeline's board, containing information on which tiles are solid.
+		/// 0 - Solid tile.
+		/// 1 - Passable tile.
 		/// </summary>
 		public int[,] Layout;
 
@@ -138,6 +140,24 @@ namespace TemporalThievery
 			}
 		}
 
+		/// <summary>
+		/// Returns true if the element is solid i.e. if it will cause an invalid puzzle state if it overlaps with another solid.
+		/// </summary>
+		/// <param name="element"></param>
+		/// <returns></returns>
+		public bool IsElementSolid(Element element)
+		{
+			if (element.Type == "Gate" && !Channels[element.Channel] ^ element.Toggle)
+			{
+				return true;
+			}
+			if (element.Type == "Safe" || element.Type == "Anchor")
+			{
+				return true;
+			}
+			return false;
+		}
+
 		// Points and pairs of ints are effectively the same thing.
 
 		/// <summary>
@@ -156,6 +176,11 @@ namespace TemporalThievery
 		/// <returns></returns>
 		public bool IsWalkable(int x, int y)
 		{
+			// You are never allowed to leave the board.
+			if (x < 0 || y < 0 || x >= Dimensions.X || y >= Dimensions.Y)
+			{
+				return false;
+			}
 			try
 			{
 				foreach (Element element in Elements)
@@ -169,7 +194,8 @@ namespace TemporalThievery
 			}
 			catch (IndexOutOfRangeException)
 			{
-				return false;
+				throw new Exception("Despite my assumptions, it turns out you CAN index out of bounds here.");
+				// return false;
 			}
 		}
 
