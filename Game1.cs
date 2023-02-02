@@ -1,8 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿#define WINFORMS
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Text.Json;
+using System.Collections.Generic;
 using TemporalThievery.Commands;
 using TemporalThievery.Input;
 using TemporalThievery.Utils;
@@ -35,6 +38,7 @@ namespace TemporalThievery
 
 		public static Texture2D GameTiles;
 		public static Texture2D HUDIcons;
+		public static SpriteFont TestFont;
 
 		protected override void LoadContent()
 		{
@@ -42,6 +46,7 @@ namespace TemporalThievery
 
 			GameTiles = Content.Load<Texture2D>("GameTiles");
 			HUDIcons = Content.Load<Texture2D>("HUDIcons");
+			TestFont = Content.Load<SpriteFont>("TestFont");
 
 			// TODO: use this.Content to load your game content here
 		}
@@ -59,8 +64,39 @@ namespace TemporalThievery
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
+
+#if WINFORMS
+
+			if (KeyHelper.Pressed(Keys.OemTilde))
+			{
+				var fileContent = string.Empty;
+				var filePath = string.Empty;
+	
+				using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+				{
+					openFileDialog.InitialDirectory = "./Puzzles";
+					openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+					openFileDialog.FilterIndex = 2;
+					openFileDialog.RestoreDirectory = true;
+	
+					if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+					{
+						//Get the path of specified file
+						filePath = openFileDialog.FileName;
+	
+						if (File.Exists(filePath))
+						{
+							InitializePuzzleFromFilePath(filePath);
+						}
+					}
+				}
+			}
+#endif
+
+
 			for (int i = 0; i < 10; i++)
 			{
+
 				if (KeyHelper.Pressed(Keys.D1 + i))
 				{
 					string path = @".\Puzzles\Chapter_0\Level_" + i + ".json";        
