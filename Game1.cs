@@ -54,7 +54,7 @@ namespace TemporalThievery
 		public void InitializePuzzleFromFilePath(string path)
 		{
 			string json = File.ReadAllText(path);
-			PuzzleLoader puzzleLoader = JsonSerializer.Deserialize<PuzzleLoader>(json);
+			PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
 			puzzle = puzzleLoader.ToPuzzle();
 			manager = new CommandManager(puzzle);
 		}

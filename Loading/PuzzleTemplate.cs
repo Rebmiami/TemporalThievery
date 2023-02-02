@@ -8,7 +8,7 @@ namespace TemporalThievery
 	/// <summary>
 	/// A template for loading puzzles from JSON. Contains a method <see cref="ToPuzzle"/> to convert itself to a <see cref="PuzzleState"/> in a format the game can use.
 	/// </summary>
-	public class PuzzleLoader
+	public class PuzzleTemplate
 	{
 		public string Name { get; set; }
 
