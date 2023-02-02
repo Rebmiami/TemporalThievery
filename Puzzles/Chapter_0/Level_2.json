@@ -1,0 +1,33 @@
+{
+	"Name": "Moneybags",
+
+	"CashGoal": 1,
+	"MaxTimeline": 3,
+	"Jump": -1,
+	"Branch": -1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 0, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 2, 0 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 4, 0 ]
+	}
+}

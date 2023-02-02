@@ -1,0 +1,65 @@
+{
+	"Name": "Pigeonholed",
+
+	"CashGoal": 1,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 1, 6 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 2 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 5, 2 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 1, 2 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 3, 0 ],
+					"Channel": 1
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 0, 2 ],
+					"Toggle": false,
+					"Channel": 1
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 3, 1 ],
+					"Toggle": false,
+					"Channel": 0
+				}
+			],
+			"Layout": [
+				[ 0, 0, 0, 1, 0, 0, 0 ],
+				[ 0, 0, 0, 1, 0, 0, 0 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 0, 1, 0, 1, 1, 1, 1 ],
+				[ 0, 1, 0, 1, 1, 1, 1 ],
+				[ 0, 1, 0, 1, 1, 1, 1 ],
+				[ 0, 1, 0, 1, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 4, 4 ]
+	}
+}

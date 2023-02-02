@@ -74,6 +74,11 @@ namespace TemporalThievery
 				}
 
 				origin.Y += timeline.Dimensions.Y * 8 + 16;
+				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
+				{
+					origin.Y = 50;
+					origin.X += timeline.Dimensions.X * 8 + 16;
+				}
 			}
 		}
 
