@@ -82,6 +82,12 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
+        
+    - uses: vimtor/action-zip@v1
+      with:
+        files: $D:\a\TemporalThievery\TemporalThievery
+        recursive: false
+        dest: result.zip
 
     # Upload artifact
     - name: Upload build artifacts
