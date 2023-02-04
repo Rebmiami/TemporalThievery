@@ -57,9 +57,9 @@ jobs:
 
     env:
       Solution_Name: TemporalThievery.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      #Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
@@ -68,14 +68,20 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
+    - name: Install .NET Core 6.0
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
 
+    # Install the .NET Core workload
+    - name: Install .NET Core 3.1
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+    #- name: Setup MSBuild.exe
+    #  uses: microsoft/setup-msbuild@v1.0.2
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     #- name: Restore the application
@@ -92,7 +98,7 @@ jobs:
       uses: igotinfected-ci/build-monogame@v2.0.3
       with:
         # .NET version to set up `dotnet` with. Defaults to `3.1.x`.
-        dotnet-version: 6.0.x # optional, default is 3.1.x
+        dotnet-version: 3.1.x # optional, default is 3.1.x
         # Path to the `.sln`. Used to restore NuGet packages from.
         solution-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.sln
         # Path to the `Content.mgcb` file for a specific project. Used to build the MonoGame content files.
@@ -125,4 +131,4 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-       path: C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+       path: D:\a\TemporalThievery\TemporalThievery\
