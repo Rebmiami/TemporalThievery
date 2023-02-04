@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms">
-      <HintPath>..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.Windows.Forms.dll</HintPath>
+      <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Windows.Forms.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
