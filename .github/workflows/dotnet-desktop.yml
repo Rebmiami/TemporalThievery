@@ -133,21 +133,21 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: TemporalThievery_${{ matrix.configuration }}
-        path: D:/a/Archive
+        path: D:/a/Archive_${{ matrix.configuration }}
         
-    - uses: actions/checkout@master
+    # - uses: actions/checkout@master
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
       with:
-        directory: D:/a/Archive
+        directory: D:/a/Archive_${{ matrix.configuration }}
         type: 'zip'
-        filename: D:/a/Release.zip
+        filename: D:/a/TemporalThievery_${{ matrix.configuration }}.zip
     
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
-        artifacts: D:/a/Release.zip #${{ github.workspace }}\TemporalThievery_${{ matrix.configuration }}.zip
+        artifacts: D:/a/TemporalThievery_${{ matrix.configuration }}.zip #${{ github.workspace }}\TemporalThievery_${{ matrix.configuration }}.zip
         commit: master
         tag: auto
         name: Latest Commit Release
