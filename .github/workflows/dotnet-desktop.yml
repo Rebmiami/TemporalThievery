@@ -135,8 +135,8 @@ jobs:
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
       with:
-        directory: D:\a\TemporalThievery\TemporalThievery\bin\${{ matrix.configuration }}
-        path: ./net6.0
+        directory: ${{ github.workspace }}
+        path: ./bin/net6.0
         type: 'zip'
         filename: TemporalThievery_${{ matrix.configuration }}.zip
     
