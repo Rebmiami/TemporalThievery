@@ -133,7 +133,7 @@ jobs:
         
     - uses: vimtor/action-zip@v1
       with:
-        files: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
+        files: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0/
         recursive: true
         dest: TemporalThievery_${{ matrix.configuration }}.zip
     
