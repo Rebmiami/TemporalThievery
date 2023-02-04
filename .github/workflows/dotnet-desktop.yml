@@ -131,4 +131,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-       path: D:\a\TemporalThievery\TemporalThievery\
+        name: TemporalThievery_${{ matrix.configuration }}
+        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
