@@ -55,7 +55,8 @@ jobs:
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
-
+    permissions:
+      contents: write
     env:
       Solution_Name: TemporalThievery.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       #Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
@@ -133,9 +134,10 @@ jobs:
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
-        artifacts: "TemporalThievery_Release"
+        artifacts: "TemporalThievery_Release.zip"
         commit: master
         tag: auto
         name: Latest Commit Release
+        makeLatest: false
         body: This is an auto-generated release containing the most recent version of Temporal Thievery based on the latest commit. These are NOT finished releases and are intended for testing and debugging.
       
