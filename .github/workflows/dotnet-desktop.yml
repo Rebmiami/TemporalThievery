@@ -85,7 +85,7 @@ jobs:
         
     - uses: vimtor/action-zip@v1
       with:
-        files: $D:\a\TemporalThievery\TemporalThievery
+        files: D:\a\TemporalThievery\TemporalThievery
         recursive: false
         dest: result.zip
 
@@ -93,4 +93,4 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        path: $D:\a\TemporalThievery\TemporalThievery
+        path: $${{ github.workspace }}/result.zip
