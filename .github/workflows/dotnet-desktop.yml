@@ -134,14 +134,14 @@ jobs:
     - uses: vimtor/action-zip@v1
       with:
         files: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
-        recursive: false
-        dest: result.zip
+        recursive: true
+        dest: TemporalThievery_${{ matrix.configuration }}.zip
     
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
-        artifacts: ${{ github.workspace }}/result.zip
+        artifacts: ${{ github.workspace }}/TemporalThievery_${{ matrix.configuration }}.zip
         commit: master
         tag: auto
         name: Latest Commit Release
