@@ -78,14 +78,51 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
-      env:
-        Configuration: ${{ matrix.configuration }}
+    #- name: Restore the application
+    #  run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+    #  env:
+    #    Configuration: ${{ matrix.configuration }}
+        
+        
+        
 
-    # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Build MonoGame project
+      # You may pin to the exact commit or the version.
+      # uses: igotinfected-ci/build-monogame@9317f27298266101efa9dea378e04cfa2f774751
+      uses: igotinfected-ci/build-monogame@v2.0.3
+      with:
+        # .NET version to set up `dotnet` with. Defaults to `3.1.x`.
+        dotnet-version: 6.0.x # optional, default is 3.1.x
+        # Path to the `.sln`. Used to restore NuGet packages from.
+        solution-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.sln
+        # Path to the `Content.mgcb` file for a specific project. Used to build the MonoGame content files.
+
+    # Note: this may not be required in future releases.
+
+        content-mgcb-path: D:\a\TemporalThievery\TemporalThievery\Content\
+        # Platform to build Content files for. E.g.: `Android`.
+        content-mgcb-platform: Windows
+        # Path to the `.csproj` to build with. This is passed to `msbuild` to initiate the build.
+
+        csproj-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.csproj
+       # The `msbuild` target to use. E.g.: `PackageForAndroid`.
+        build-target: Build
+        # The `msbuild` build configuration to use. Defaults to `Release`.
+        build-configuration: ${{ matrix.configuration }} # default is Release
+
+
+    # - name: Display file tree
+    #   run: tree C:\
+        
+    #- name: Compress 
+    #  uses: vimtor/action-zip@v1
+    #  with:
+    #    files: D:\a\TemporalThievery\TemporalThievery\
+    #    recursive: false
+    #    dest: result.zip
+
+    # Upload artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: MSIX Package
-        path: ${{ env.Wap_Project_Directory }}\AppPackages
+       path: C:\Program Files\Microsoft Visual Studio\2022\Enterprise
