@@ -68,10 +68,16 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core
+    - name: Install .NET Core 6.0
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
+
+    # Install the .NET Core workload
+    - name: Install .NET Core 3.1
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 3.1.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
@@ -125,4 +131,4 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-       path: C:\Program Files\Microsoft Visual Studio\2022\Enterprise
+       path: D:\a\TemporalThievery\TemporalThievery\
