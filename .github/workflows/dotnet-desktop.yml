@@ -131,11 +131,14 @@ jobs:
         path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
         
         
-    - uses: vimtor/action-zip@v1
+    - uses: actions/checkout@master
+    - name: Archive Release
+      uses: thedoctor0/zip-release@0.7.1
       with:
-        files: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0/
-        recursive: true
-        dest: TemporalThievery_${{ matrix.configuration }}.zip
+        directory: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/
+        path: ./net6.0
+        type: 'zip'
+        filename: TemporalThievery_${{ matrix.configuration }}.zip
     
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
