@@ -36,7 +36,7 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: .NET Core Desktop
+name: Build Testing Release
 
 on:
   push:
@@ -141,6 +141,7 @@ jobs:
         allowUpdates: true
         artifacts: TemporalThievery_Release
         commit: master
+        tag: Testing Release
         name: Latest Commit Release
         body: This is an auto-generated release containing the most recent version of Temporal Thievery based on the latest commit. These are NOT finished releases and are intended for testing and debugging.
       
