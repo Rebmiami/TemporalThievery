@@ -71,7 +71,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 5.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
@@ -92,7 +92,7 @@ jobs:
       uses: igotinfected-ci/build-monogame@v2.0.3
       with:
         # .NET version to set up `dotnet` with. Defaults to `3.1.x`.
-        dotnet-version: 6.0.x # optional, default is 3.1.x
+        dotnet-version: 5.0.x # optional, default is 3.1.x
         # Path to the `.sln`. Used to restore NuGet packages from.
         solution-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.sln
         # Path to the `Content.mgcb` file for a specific project. Used to build the MonoGame content files.
@@ -108,7 +108,7 @@ jobs:
        # The `msbuild` target to use. E.g.: `PackageForAndroid`.
         build-target: Build
         # The `msbuild` build configuration to use. Defaults to `Release`.
-        build-configuration: Release # default is Release
+        build-configuration: ${{ matrix.configuration }} # default is Release
 
 
     # - name: Display file tree
