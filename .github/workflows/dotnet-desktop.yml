@@ -130,11 +130,18 @@ jobs:
         name: TemporalThievery_${{ matrix.configuration }}
         path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
         
+        
+    - uses: vimtor/action-zip@v1
+      with:
+        files: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
+        recursive: false
+        dest: result.zip
+    
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
-        artifacts: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
+        artifacts: ${{ github.workspace }}/result.zip
         commit: master
         tag: auto
         name: Latest Commit Release
