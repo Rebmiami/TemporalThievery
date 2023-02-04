@@ -83,14 +83,15 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
         
-    - uses: vimtor/action-zip@v1
-      with:
-        files: D:\a\TemporalThievery\TemporalThievery\
-        recursive: false
-        dest: result.zip
+    #- name: Compress 
+    #  uses: vimtor/action-zip@v1
+    #  with:
+    #    files: D:\a\TemporalThievery\TemporalThievery\
+    #    recursive: false
+    #    dest: result.zip
 
     # Upload artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        path: $${{ github.workspace }}/result.zip
+        path: ${{ github.workspace }}
