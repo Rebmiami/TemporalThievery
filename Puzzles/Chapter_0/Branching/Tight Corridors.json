@@ -1,10 +1,10 @@
 {
-	"Name": "Moneybags",
+	"Name": "Tight Corridors",
 
-	"CashGoal": 1,
+	"CashGoal": 2,
 	"MaxTimeline": 3,
-	"Jump": -1,
-	"Branch": -1,
+	"Jump": 2,
+	"Branch": 2,
 	"Kill": 0,
 	"Return": 0,
 

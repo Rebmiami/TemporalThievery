@@ -63,7 +63,7 @@ namespace TemporalThievery.Gameplay
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			Vector2 origin = new Vector2(60, 10);
+			Vector2 origin = new Vector2(60, 15);
 			foreach (Timeline timeline in Timelines)
 			{
 				timeline.Draw(spriteBatch, origin);
@@ -76,7 +76,7 @@ namespace TemporalThievery.Gameplay
 				origin.Y += timeline.Dimensions.Y * 8 + 16;
 				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
 				{
-					origin.Y = 10;
+					origin.Y = 15;
 					origin.X += timeline.Dimensions.X * 8 + 16;
 				}
 			}

@@ -1,0 +1,48 @@
+{
+	"Name": "Corner Case",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": 1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 1, 4 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 5, 2 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 1, 3 ],
+					"Toggle": false,
+					"Channel": 0
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 1 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 0, 0, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 0, 0, 1, 0 ],
+				[ 0, 1, 0, 0, 0, 0, 0 ],
+				[ 0, 1, 0, 0, 0, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 1 ]
+	}
+}

@@ -21,8 +21,9 @@ namespace TemporalThievery.Gameplay
 {
 	public class PuzzleScene : Scene
 	{
-		public static PuzzleState puzzle;
-		public static CommandManager manager;
+		public PuzzleState puzzle;
+		public CommandManager manager;
+		public string puzzlePath;
 
 		public PuzzleScene()
 		{
@@ -31,6 +32,7 @@ namespace TemporalThievery.Gameplay
 
 		public void InitializePuzzleFromFilePath(string path)
 		{
+			puzzlePath = path;
 			string json = File.ReadAllText(path);
 			PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
 			puzzle = puzzleLoader.ToPuzzle();
@@ -67,19 +69,24 @@ namespace TemporalThievery.Gameplay
 			}
 #endif
 
-
-			for (int i = 0; i < 10; i++)
+			if (KeyHelper.Pressed(Keys.R))
 			{
-
-				if (KeyHelper.Pressed(Keys.D1 + i))
-				{
-					string path = @".\Puzzles\Chapter_0\Level_" + i + ".json";
-					if (File.Exists(path))
-					{
-						InitializePuzzleFromFilePath(path);
-					}
-				}
+				InitializePuzzleFromFilePath(puzzlePath);
 			}
+
+
+			// for (int i = 0; i < 10; i++)
+			// {
+			// 
+			// 	if (KeyHelper.Pressed(Keys.D1 + i))
+			// 	{
+			// 		string path = @".\Puzzles\Chapter_0\Level_" + i + ".json";
+			// 		if (File.Exists(path))
+			// 		{
+			// 			InitializePuzzleFromFilePath(path);
+			// 		}
+			// 	}
+			// }
 
 
 
@@ -127,6 +134,7 @@ namespace TemporalThievery.Gameplay
 		{
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
 
+			spriteBatch.DrawString(Game1.TestFont, puzzle.Name, new Vector2(50, 0), Color.White);
 
 			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 10), new Rectangle(0, 0 * 12, 15, 12), Color.White);
 			spriteBatch.DrawString(Game1.TestFont, puzzle.Jumps.ToString(), new Vector2(24, 10), Color.White);
