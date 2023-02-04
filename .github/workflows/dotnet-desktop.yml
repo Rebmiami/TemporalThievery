@@ -50,7 +50,8 @@ jobs:
 
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        # configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -133,3 +134,13 @@ jobs:
       with:
         name: TemporalThievery_${{ matrix.configuration }}
         path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
+        
+    - name: Create Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        allowUpdates: true
+        artifacts: TemporalThievery_Release
+        commit: master
+        name: Latest Commit Release
+        body: This is an auto-generated release containing the most recent version of Temporal Thievery based on the latest commit. These are NOT finished releases and are intended for testing and debugging.
+      
