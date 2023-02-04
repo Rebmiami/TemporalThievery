@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TemporalThievery.Commands.Deltas;
+using TemporalThievery.Gameplay;
 using TemporalThievery.Utils;
 
 namespace TemporalThievery.Commands

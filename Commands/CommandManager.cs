@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Gameplay;
 
-namespace TemporalThievery
+namespace TemporalThievery.Commands
 {
 	// Temporal Thievery uses a "command manager" system, in which all actions the player can take are called "commands".
 	// The "command manager" class keeps track of all commands the player has executed.

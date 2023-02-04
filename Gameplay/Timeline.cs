@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TemporalThievery
+namespace TemporalThievery.Gameplay
 {
 	public class Timeline : ICloneable
 	{

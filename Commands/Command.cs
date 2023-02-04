@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using TemporalThievery.Commands.Deltas;
+using TemporalThievery.Gameplay;
 
-namespace TemporalThievery
+namespace TemporalThievery.Commands
 {
 	/// <summary>
 	/// Interface handling the execution of any action the player can take.

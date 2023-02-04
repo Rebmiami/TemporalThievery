@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Gameplay;
 
-namespace TemporalThievery
+namespace TemporalThievery.Loading
 {
 	/// <summary>
 	/// A template for loading puzzles from JSON. Contains a method <see cref="ToPuzzle"/> to convert itself to a <see cref="PuzzleState"/> in a format the game can use.

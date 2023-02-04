@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace TemporalThievery
+namespace TemporalThievery.Gameplay
 {
 	/// <summary>
 	/// Contains information on the current puzzle.
@@ -63,7 +63,7 @@ namespace TemporalThievery
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			Vector2 origin = new Vector2(50);
+			Vector2 origin = new Vector2(60, 10);
 			foreach (Timeline timeline in Timelines)
 			{
 				timeline.Draw(spriteBatch, origin);
@@ -76,7 +76,7 @@ namespace TemporalThievery
 				origin.Y += timeline.Dimensions.Y * 8 + 16;
 				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
 				{
-					origin.Y = 50;
+					origin.Y = 10;
 					origin.X += timeline.Dimensions.X * 8 + 16;
 				}
 			}

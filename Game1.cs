@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using TemporalThievery.Commands;
 using TemporalThievery.Input;
 using TemporalThievery.Utils;
+using TemporalThievery.Scenes;
+using TemporalThievery.Gameplay;
+using TemporalThievery.PuzzleEditor;
 
 namespace TemporalThievery
 {
@@ -24,14 +27,13 @@ namespace TemporalThievery
 			IsMouseVisible = true;
 		}
 
-		public static PuzzleState puzzle;
-		public static CommandManager manager;
-
 		protected override void Initialize()
 		{
+			PuzzleScene newScene = new PuzzleScene();
+			newScene.InitializePuzzleFromFilePath(@".\Puzzles\Chapter_0\Level_5.json");
+			activeScene = newScene;
 			// TODO: Add your initialization logic here
 
-			InitializePuzzleFromFilePath(@".\Puzzles\Chapter_0\Level_5.json");
 
 			base.Initialize();
 		}
@@ -51,100 +53,19 @@ namespace TemporalThievery
 			// TODO: use this.Content to load your game content here
 		}
 
-		public void InitializePuzzleFromFilePath(string path)
-		{
-			string json = File.ReadAllText(path);
-			PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
-			puzzle = puzzleLoader.ToPuzzle();
-			manager = new CommandManager(puzzle);
-		}
+
+		public static Scene activeScene;
 
 		protected override void Update(GameTime gameTime)
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
+			activeScene.Update(gameTime);
 
-#if WINFORMS
-
-			if (KeyHelper.Pressed(Keys.OemTilde))
+			if (KeyHelper.Pressed(Keys.F1))
 			{
-				var fileContent = string.Empty;
-				var filePath = string.Empty;
-	
-				using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
-				{
-					openFileDialog.InitialDirectory = "./Puzzles";
-					openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
-					openFileDialog.FilterIndex = 2;
-					openFileDialog.RestoreDirectory = true;
-	
-					if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-					{
-						//Get the path of specified file
-						filePath = openFileDialog.FileName;
-	
-						if (File.Exists(filePath))
-						{
-							InitializePuzzleFromFilePath(filePath);
-						}
-					}
-				}
-			}
-#endif
-
-
-			for (int i = 0; i < 10; i++)
-			{
-
-				if (KeyHelper.Pressed(Keys.D1 + i))
-				{
-					string path = @".\Puzzles\Chapter_0\Level_" + i + ".json";        
-					if (File.Exists(path))
-					{
-						InitializePuzzleFromFilePath(path);
-					}
-				}
-			}
-
-
-
-
-			// Takes in player input and moves the player avatar accordingly.
-			if (KeyHelper.Pressed(Keys.W))
-			{
-				manager.Execute(new MoveCommand(), (int)Directions.Up);
-			}
-			if (KeyHelper.Pressed(Keys.A))
-			{
-				manager.Execute(new MoveCommand(), (int)Directions.Left);
-			}
-			if (KeyHelper.Pressed(Keys.S))
-			{
-				manager.Execute(new MoveCommand(), (int)Directions.Down);
-			}
-			if (KeyHelper.Pressed(Keys.D))
-			{
-				manager.Execute(new MoveCommand(), (int)Directions.Right);
-			}
-			if (KeyHelper.Pressed(Keys.X))
-			{
-				if (puzzle.Jumps != 0)
-				{
-					manager.Execute(new JumpCommand());
-				}
-			}
-			if (KeyHelper.Pressed(Keys.C))
-			{
-				if (puzzle.Branches != 0)
-				{
-					manager.Execute(new BranchCommand());
-				}
-			}
-
-			if (KeyHelper.Pressed(Keys.Z))
-			{
-				manager.Undo();
+				activeScene = new EditorScene();
 			}
 
 			KeyHelper.Update();
@@ -157,16 +78,16 @@ namespace TemporalThievery
 			// TODO: Create a dedicated class for drawing timelines properly
 			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
 			GraphicsDevice.SetRenderTarget(renderTarget);
-
 			GraphicsDevice.Clear(new Color(20, 20, 20));
-			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-			puzzle.Draw(spriteBatch);
-			spriteBatch.End();
+
+			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch, renderTarget);
+
 			Program.game.GraphicsDevice.SetRenderTarget(null);
 
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
 			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0.0f);
 			spriteBatch.End();
+
 			renderTarget.Dispose();
 
 			base.Draw(gameTime);
