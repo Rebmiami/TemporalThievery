@@ -83,6 +83,9 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
         
+    - name: Display file tree
+      run: tree D:\
+        
     #- name: Compress 
     #  uses: vimtor/action-zip@v1
     #  with:
@@ -91,7 +94,7 @@ jobs:
     #    dest: result.zip
 
     # Upload artifact
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        path: D:\a\
+    #- name: Upload build artifacts
+    #  uses: actions/upload-artifact@v3
+    #  with:
+    #   path: D:\a\
