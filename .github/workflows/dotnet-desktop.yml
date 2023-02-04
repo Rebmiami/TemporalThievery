@@ -128,14 +128,14 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: TemporalThievery_${{ matrix.configuration }}
-        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }} #/net6.0
+        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
         
         
     - uses: actions/checkout@master
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
       with:
-        directory: ${{ github.workspace }}\bin\${{ matrix.configuration }}\net6.0
+        directory: ${{ github.workspace }}\bin\${{ matrix.configuration }} #\net6.0
         type: 'zip'
         filename: TemporalThievery_${{ matrix.configuration }}.zip
     
