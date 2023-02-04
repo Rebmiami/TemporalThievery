@@ -136,7 +136,7 @@ jobs:
       uses: thedoctor0/zip-release@0.7.1
       with:
         directory: ${{ github.workspace }}
-        path: ./bin/net6.0
+        path: ./bin/${{ matrix.configuration }}/net6.0
         type: 'zip'
         filename: TemporalThievery_${{ matrix.configuration }}.zip
     
