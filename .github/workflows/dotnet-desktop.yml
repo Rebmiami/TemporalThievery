@@ -101,7 +101,7 @@ jobs:
 
         content-mgcb-path: D:\a\TemporalThievery\TemporalThievery\Content\
         # Platform to build Content files for. E.g.: `Android`.
-        content-mgcb-platform: WinExe
+        content-mgcb-platform: Windows
         # Path to the `.csproj` to build with. This is passed to `msbuild` to initiate the build.
 
         csproj-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.csproj
