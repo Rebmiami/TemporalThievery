@@ -97,4 +97,4 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-       path: C:\Program Files\
+       path: C:\Program Files\Microsoft Visual Studio\2022\Enterprise
