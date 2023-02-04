@@ -124,26 +124,30 @@ jobs:
     #    dest: result.zip
 
     # Upload artifact
-    #- name: Upload build artifacts
-    #  uses: actions/upload-artifact@v3
-    #  with:
-    #    name: TemporalThievery_${{ matrix.configuration }}
-    #    path: D:/a #/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: TemporalThievery_${{ matrix.configuration }}
+        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0
         
+    - uses: actions/download-artifact@v3
+      with:
+        name: TemporalThievery_${{ matrix.configuration }}
+        path: D:/a/Archive
         
     - uses: actions/checkout@master
     - name: Archive Release
       uses: thedoctor0/zip-release@0.7.1
       with:
-        directory: D:/a #/TemporalThievery/TemporalThievery
+        directory: D:/a/Archive
         type: 'zip'
-        filename: TemporalThievery_${{ matrix.configuration }}.zip
+        filename: D:/a/Release.zip
     
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         allowUpdates: true
-        artifacts: D:/a/TemporalThievery_${{ matrix.configuration }}.zip #${{ github.workspace }}\TemporalThievery_${{ matrix.configuration }}.zip
+        artifacts: D:/a/Release.zip #${{ github.workspace }}\TemporalThievery_${{ matrix.configuration }}.zip
         commit: master
         tag: auto
         name: Latest Commit Release
