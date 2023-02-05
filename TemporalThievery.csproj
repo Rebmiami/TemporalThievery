@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <PublishReadyToRun>false</PublishReadyToRun>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <PublishReadyToRun>true</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
     <Platforms>AnyCPU;x86</Platforms>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>    
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
