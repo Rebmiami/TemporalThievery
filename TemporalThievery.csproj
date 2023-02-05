@@ -6,6 +6,7 @@
     <TieredCompilation>false</TieredCompilation>
     <Platforms>AnyCPU;x86</Platforms>
     <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
     <PublishSingleFile>true</PublishSingleFile>    
   </PropertyGroup>
   <PropertyGroup>
