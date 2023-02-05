@@ -4,7 +4,7 @@
 	"CashGoal": 2,
 	"MaxTimeline": 3,
 	"Jump": 2,
-	"Branch": 2,
+	"Branch": 1,
 	"Kill": 0,
 	"Return": 0,
 
@@ -19,6 +19,25 @@
 				{
 					"Type": "Safe",
 					"Position": [ 2, 0 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1 ]
+			]
+		},
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 2, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 1, 0 ]
 				}
 			],
 			"Layout": [

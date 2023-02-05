@@ -239,6 +239,19 @@ namespace TemporalThievery.Gameplay
 			return null;
 		}
 
+		public int GetMoneyBag(Point point)
+		{
+			for (int i = 0; i < Elements.Count; i++)
+			{
+				Element element = Elements[i];
+				if (element.Position == point && element.Type == "MoneyBag")
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+
 		public Element GetPushable(int x, int y) => GetPushable(new Point(x, y));
 
 

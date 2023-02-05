@@ -37,6 +37,7 @@ namespace TemporalThievery.Gameplay
 			PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
 			puzzle = puzzleLoader.ToPuzzle();
 			manager = new CommandManager(puzzle);
+			puzzle.Refresh();
 		}
 
 		public override void Update(GameTime gameTime)
@@ -108,13 +109,36 @@ namespace TemporalThievery.Gameplay
 			{
 				manager.Execute(new MoveCommand(), (int)Directions.Right);
 			}
-			if (KeyHelper.Pressed(Keys.X))
+
+
+			if (KeyHelper.Down(Keys.X) && puzzle.Jumps != 0)
 			{
-				if (puzzle.Jumps != 0)
+				if (puzzle.Timelines.Count == 1)
 				{
-					manager.Execute(new JumpCommand());
+
+				}
+				else if (puzzle.Timelines.Count == 2)
+				{
+					if (KeyHelper.Pressed(Keys.X))
+					{
+						manager.Execute(new JumpCommand(), 1 - puzzle.Player.Timeline);
+					}
+				}
+				else
+				{
+					for (int i = 0; i < 10; i++)
+					{
+						if (puzzle.Player.Timeline != i && KeyHelper.Pressed(Keys.D1 + i))
+						{
+							manager.Execute(new JumpCommand(), i);
+							break;
+						}
+					}
 				}
 			}
+
+			
+
 			if (KeyHelper.Pressed(Keys.C))
 			{
 				if (puzzle.Branches != 0)
@@ -149,10 +173,12 @@ namespace TemporalThievery.Gameplay
 			spriteBatch.DrawString(Game1.TestFont, puzzle.Returns.ToString(), new Vector2(24, 55), Color.White);
 
 			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 80), new Rectangle(0, 4 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Timelines.Count + "/" + puzzle.MaxTimeline.ToString(), new Vector2(24, 80), Color.White);
+			spriteBatch.DrawString(Game1.TestFont, puzzle.Timelines.Count + "/" + puzzle.MaxTimeline.ToString(), new Vector2(24, 80), 
+				puzzle.Timelines.Count < puzzle.MaxTimeline ? Color.White : Color.Red);
 
 			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 95), new Rectangle(0, 5 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, "WIP", new Vector2(24, 95), Color.White);
+			spriteBatch.DrawString(Game1.TestFont, puzzle.CollectedCash + "/" + puzzle.CashGoal.ToString(), new Vector2(24, 95),
+				puzzle.CollectedCash < puzzle.CashGoal ? Color.White : Color.Green);
 
 
 

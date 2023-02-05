@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Commands.Deltas;
 using TemporalThievery.Gameplay;
 
 namespace TemporalThievery.Commands
@@ -43,7 +44,19 @@ namespace TemporalThievery.Commands
 			{
 				command.deltas.Clear();
 				command.Execute(puzzle, arg);
+
+				// Check for collected cash
+				CollectDelta collectDelta = puzzle.CheckPlayerOverlappingMoney();
+				if (collectDelta != null)
+				{
+					command.deltas.Push(collectDelta);
+					collectDelta.Execute(puzzle);
+				}
+
 				commands.Push(command);
+
+
+
 				puzzle.Refresh();
 			}
 		}

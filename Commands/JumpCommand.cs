@@ -10,12 +10,7 @@ namespace TemporalThievery.Commands
 	{
 		public override void Execute(PuzzleState puzzle, int arg)
 		{
-			int timeline = puzzle.Player.Timeline + 1;
-			if (timeline >= puzzle.Timelines.Count)
-            {
-				timeline = 0;
-			}
-			deltas.Push(new PlayerDelta(puzzle, puzzle.Player.Position, timeline));
+			deltas.Push(new PlayerDelta(puzzle, puzzle.Player.Position, arg));
 			puzzle.Jumps--;
 			base.Execute(puzzle, arg);
 		}

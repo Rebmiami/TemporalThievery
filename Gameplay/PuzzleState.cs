@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using TemporalThievery.Commands.Deltas;
+using TemporalThievery.Input;
 
 namespace TemporalThievery.Gameplay
 {
@@ -19,6 +22,11 @@ namespace TemporalThievery.Gameplay
 		/// The number of money bags the player must collect to complete the puzzle.
 		/// </summary>
 		public int CashGoal;
+
+		/// <summary>
+		/// Amount of money bags the player has collected.
+		/// </summary>
+		public int CollectedCash;
 
 		/// <summary>
 		/// The maximum number of timelines the player is allowed to have running parallel.
@@ -63,15 +71,22 @@ namespace TemporalThievery.Gameplay
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
+			bool specialJumpMode = KeyHelper.Down(Keys.X) && Timelines.Count > 2;
 			Vector2 origin = new Vector2(60, 15);
-			foreach (Timeline timeline in Timelines)
+			for (int i = 0; i < Timelines.Count; i++)
 			{
+				Timeline timeline = Timelines[i];
 				timeline.Draw(spriteBatch, origin);
 
 				if (Timelines[Player.Timeline] == timeline)
                 {
 					spriteBatch.Draw(Game1.GameTiles, origin + new Vector2(Player.Position.X * 8, Player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
 				}
+				else if (specialJumpMode)
+				{
+					spriteBatch.DrawString(Game1.TestFont, (i + 1).ToString(), origin + new Vector2(timeline.Dimensions.X * 8 + 3, 0), Color.White);
+				}
+
 
 				origin.Y += timeline.Dimensions.Y * 8 + 16;
 				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
@@ -148,6 +163,16 @@ namespace TemporalThievery.Gameplay
 			}
 
 			return PuzzleStateLegality.Legal;
+		}
+
+		public CollectDelta CheckPlayerOverlappingMoney()
+		{
+			int moneyBag = Timelines[Player.Timeline].GetMoneyBag(Player.Position);
+			if (moneyBag >= 0)
+			{
+				return new CollectDelta(this, Player.Timeline, moneyBag);
+			}
+			return null;
 		}
 
 		public object Clone()
