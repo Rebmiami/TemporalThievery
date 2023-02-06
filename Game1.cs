@@ -38,17 +38,19 @@ namespace TemporalThievery
 			base.Initialize();
 		}
 
-		public static Texture2D GameTiles;
+		public static Texture2D GameTilesDebug;
 		public static Texture2D HUDIcons;
+		public static Texture2D EditorCursor;
 		public static SpriteFont TestFont;
 
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			GameTiles = Content.Load<Texture2D>("GameTiles");
+			GameTilesDebug = Content.Load<Texture2D>("GameTiles");
 			HUDIcons = Content.Load<Texture2D>("HUDIcons");
 			TestFont = Content.Load<SpriteFont>("TestFont");
+			EditorCursor = Content.Load<Texture2D>("EditorCursor");
 
 			// TODO: use this.Content to load your game content here
 		}

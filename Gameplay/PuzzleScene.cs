@@ -24,6 +24,7 @@ namespace TemporalThievery.Gameplay
 		public PuzzleState puzzle;
 		public CommandManager manager;
 		public string puzzlePath;
+		public bool editorContext;
 
 		public PuzzleScene()
 		{
@@ -40,40 +41,50 @@ namespace TemporalThievery.Gameplay
 			puzzle.Refresh();
 		}
 
+		public void InitializePuzzleFromState(PuzzleState state)
+		{
+			// Prevent loading/reloading puzzles since this method does not store a path
+			editorContext = true;
+			puzzle = state;
+			manager = new CommandManager(state);
+			state.Refresh();
+		}
+
 		public override void Update(GameTime gameTime)
 		{
-#if WINFORMS
-
-			if (KeyHelper.Pressed(Keys.OemTilde))
+			if (!editorContext)
 			{
-				var fileContent = string.Empty;
-				var filePath = string.Empty;
-	
-				// TODO: Replace Windows Forms to allow compatibility with other platforms
-				using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
+#if WINFORMS
+				if (KeyHelper.Pressed(Keys.OemTilde))
 				{
-					openFileDialog.InitialDirectory = "./Puzzles";
-					openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
-					openFileDialog.FilterIndex = 2;
-					openFileDialog.RestoreDirectory = true;
-	
-					if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+					var fileContent = string.Empty;
+					var filePath = string.Empty;
+
+					// TODO: Replace Windows Forms to allow compatibility with other platforms
+					using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
 					{
-						//Get the path of specified file
-						filePath = openFileDialog.FileName;
-	
-						if (File.Exists(filePath))
+						openFileDialog.InitialDirectory = "./Puzzles";
+						openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+						openFileDialog.FilterIndex = 2;
+						openFileDialog.RestoreDirectory = true;
+
+						if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
 						{
-							InitializePuzzleFromFilePath(filePath);
+							//Get the path of specified file
+							filePath = openFileDialog.FileName;
+
+							if (File.Exists(filePath))
+							{
+								InitializePuzzleFromFilePath(filePath);
+							}
 						}
 					}
 				}
-			}
 #endif
-
-			if (KeyHelper.Pressed(Keys.R))
-			{
-				InitializePuzzleFromFilePath(puzzlePath);
+				if (KeyHelper.Pressed(Keys.R))
+				{
+					InitializePuzzleFromFilePath(puzzlePath);
+				}
 			}
 
 

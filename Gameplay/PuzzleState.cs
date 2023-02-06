@@ -77,11 +77,11 @@ namespace TemporalThievery.Gameplay
 			for (int i = 0; i < Timelines.Count; i++)
 			{
 				Timeline timeline = Timelines[i];
-				timeline.Draw(spriteBatch, origin);
+				timeline.DrawDebug(spriteBatch, origin);
 
 				if (Timelines[Player.Timeline] == timeline)
                 {
-					spriteBatch.Draw(Game1.GameTiles, origin + new Vector2(Player.Position.X * 8, Player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+					spriteBatch.Draw(Game1.GameTilesDebug, origin + new Vector2(Player.Position.X * 8, Player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
 				}
 				else if (specialJumpMode)
 				{
@@ -200,9 +200,17 @@ namespace TemporalThievery.Gameplay
 		{
 			PuzzleState puzzleState = new PuzzleState
 			{
+				Name = Name,
+				CashGoal = CashGoal,
+				CollectedCash = CollectedCash,
 				Player = (Player)Player.Clone(),
 				MaxTimeline = MaxTimeline,
 				Timelines = new List<Timeline>(),
+				Jumps = Jumps,
+				Branches = Branches,
+				Returns = Returns,
+				Kills = Kills,
+				Theme = Theme,
 			};
 			foreach (Timeline timeline in Timelines)
 			{

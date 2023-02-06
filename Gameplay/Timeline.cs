@@ -87,7 +87,7 @@ namespace TemporalThievery.Gameplay
 			}
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 origin)
+		public void DrawDebug(SpriteBatch spriteBatch, Vector2 origin)
 		{
 			for (int i = 0; i < Dimensions.X; i++)
 			{
@@ -96,7 +96,7 @@ namespace TemporalThievery.Gameplay
 				{
 					if (Layout[i, j] == 1)
 					{
-						spriteBatch.Draw(Game1.GameTiles, origin + new Vector2(i * 8, j * 8), new Rectangle(9 * (checker ? 0 : 1), 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0f);
+						spriteBatch.Draw(Game1.GameTilesDebug, origin + new Vector2(i * 8, j * 8), new Rectangle(9 * (checker ? 0 : 1), 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0f);
 					}
 					checker = !checker;
 				}
@@ -108,34 +108,34 @@ namespace TemporalThievery.Gameplay
 				{
 					case "Safe":
 						{
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
 							break;
 						}
 
 					case "Pad":
 						{
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 0, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 0, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
 							break;
 						}
 
 					case "Gate":
 						{
 							bool open = Channels[element.Channel] ^ element.Toggle;
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + element.Position.ToVector2() * 8, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 							break;
 						}
 
 					case "MoneyBag":
 						{
 							bool open = Channels[element.Channel] ^ element.Toggle;
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 1, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 1, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 							break;
 						}
 
 					case "OneWay":
 						{
 							int direction = element.Direction;
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * direction, 9 * 3, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + element.Position.ToVector2() * 8, new Rectangle(9 * direction, 9 * 3, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 							break;
 						}
 
