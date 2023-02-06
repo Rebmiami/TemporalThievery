@@ -105,19 +105,19 @@ namespace TemporalThievery.Gameplay
 
 
 			// Takes in player input and moves the player avatar accordingly.
-			if (KeyHelper.Pressed(Keys.W))
+			if (KeyHelper.Pressed(Keys.W) || KeyHelper.Pressed(Keys.Up))
 			{
 				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Up } );
 			}
-			if (KeyHelper.Pressed(Keys.A))
+			if (KeyHelper.Pressed(Keys.A) || KeyHelper.Pressed(Keys.Left))
 			{
 				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Left } );
 			}
-			if (KeyHelper.Pressed(Keys.S))
+			if (KeyHelper.Pressed(Keys.S) || KeyHelper.Pressed(Keys.Down))
 			{
 				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Down } );
 			}
-			if (KeyHelper.Pressed(Keys.D))
+			if (KeyHelper.Pressed(Keys.D) || KeyHelper.Pressed(Keys.Right))
 			{
 				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Right } );
 			}
