@@ -28,7 +28,7 @@
 				{
 					"Type": "Pad",
 					"Position": [ 6, 2 ],
-					"Channel": 0
+					"Channel": 2
 				},
 				{
 					"Type": "Pad",
@@ -64,7 +64,7 @@
 					"Type": "Gate",
 					"Position": [ 1, 3 ],
 					"Toggle": false,
-					"Channel": 0
+					"Channel": 2
 				},
 				{
 					"Type": "Gate",
