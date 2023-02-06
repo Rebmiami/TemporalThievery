@@ -33,17 +33,17 @@ namespace TemporalThievery.Commands
 			this.puzzle = puzzle;
 		}
 
-		public void Execute(Command command, int arg = 0)
+		public void Execute(Command command, int[] args)
 		{
 			// Ensure that executing this command will not leave the puzzle in an illegal state.
 			PuzzleState tempPuzzle = (PuzzleState)puzzle.Clone();
 
-			command.Execute(tempPuzzle, arg);
+			command.Execute(tempPuzzle, args);
 			tempPuzzle.Refresh();
-			if (tempPuzzle.GetLegality() == PuzzleStateLegality.Legal)
+			if (tempPuzzle.GetLegality(command.deltas) == PuzzleStateLegality.Legal)
 			{
 				command.deltas.Clear();
-				command.Execute(puzzle, arg);
+				command.Execute(puzzle, args);
 
 				// Check for collected cash
 				CollectDelta collectDelta = puzzle.CheckPlayerOverlappingMoney();

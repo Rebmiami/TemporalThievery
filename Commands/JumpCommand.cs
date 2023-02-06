@@ -8,11 +8,11 @@ namespace TemporalThievery.Commands
 {
 	public class JumpCommand : Command
 	{
-		public override void Execute(PuzzleState puzzle, int arg)
+		public override void Execute(PuzzleState puzzle, int[] args)
 		{
-			deltas.Push(new PlayerDelta(puzzle, puzzle.Player.Position, arg));
+			deltas.Push(new PlayerDelta(puzzle, puzzle.Player.Position, args[0], Utils.Directions.None));
 			puzzle.Jumps--;
-			base.Execute(puzzle, arg);
+			base.Execute(puzzle, args);
 		}
 
 		public override void Undo(PuzzleState puzzle)

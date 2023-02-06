@@ -1,0 +1,55 @@
+{
+	"Name": "Oneway Setup Sandbox",
+
+	"CashGoal": 1,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "OneWay",
+					"Position": [ 3, 2 ],
+					"Direction": 0
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 3, 4 ],
+					"Direction": 1
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 2, 3 ],
+					"Direction": 2
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 4, 3 ],
+					"Direction": 3
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 4, 4 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 1 ]
+	}
+}

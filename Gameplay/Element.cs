@@ -30,7 +30,7 @@ namespace TemporalThievery
 		public bool Toggle;
 
 		/// <summary>
-		/// Used by gates and code doors to determine what direction they should face and open. <br />
+		/// Used by gates and one-way doors to determine what direction they should face and open. <br />
 		/// Uses the same directions as <see cref="Directions"/>.
 		/// </summary>
 		public int Direction;

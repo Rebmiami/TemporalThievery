@@ -3,26 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TemporalThievery.Gameplay;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery.Commands.Deltas
 {
 	class ElementDelta : IDelta
 	{
-		Element element;
-		Point oldPosition;
-		Point newPosition;
+		public Element element;
+		public Point oldPosition;
+		public Point newPosition;
 
-		public ElementDelta(PuzzleState puzzle, Point newPos, int tl, int elID)
+		public Directions direction;
+
+		public ElementDelta(PuzzleState puzzle, Point newPos, int tl, int elID, Directions dir)
 		{
 			newPosition = newPos;
 			element = puzzle.Timelines[tl].Elements[elID];
+			direction = dir;
 			Initialize(puzzle);
 		}
 
-		public ElementDelta(PuzzleState puzzle, Point newPos, Element elem)
+		public ElementDelta(PuzzleState puzzle, Point newPos, Element elem, Directions dir)
 		{
 			newPosition = newPos;
 			element = elem;
+			direction = dir;
 			Initialize(puzzle);
 		}
 

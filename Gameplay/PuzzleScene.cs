@@ -49,6 +49,7 @@ namespace TemporalThievery.Gameplay
 				var fileContent = string.Empty;
 				var filePath = string.Empty;
 	
+				// TODO: Replace Windows Forms to allow compatibility with other platforms
 				using (System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog())
 				{
 					openFileDialog.InitialDirectory = "./Puzzles";
@@ -95,19 +96,19 @@ namespace TemporalThievery.Gameplay
 			// Takes in player input and moves the player avatar accordingly.
 			if (KeyHelper.Pressed(Keys.W))
 			{
-				manager.Execute(new MoveCommand(), (int)Directions.Up);
+				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Up } );
 			}
 			if (KeyHelper.Pressed(Keys.A))
 			{
-				manager.Execute(new MoveCommand(), (int)Directions.Left);
+				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Left } );
 			}
 			if (KeyHelper.Pressed(Keys.S))
 			{
-				manager.Execute(new MoveCommand(), (int)Directions.Down);
+				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Down } );
 			}
 			if (KeyHelper.Pressed(Keys.D))
 			{
-				manager.Execute(new MoveCommand(), (int)Directions.Right);
+				manager.Execute(new MoveCommand(), new int[] { (int)Directions.Right } );
 			}
 
 
@@ -121,16 +122,16 @@ namespace TemporalThievery.Gameplay
 				{
 					if (KeyHelper.Pressed(Keys.X))
 					{
-						manager.Execute(new JumpCommand(), 1 - puzzle.Player.Timeline);
+						manager.Execute(new JumpCommand(), new int[] { 1 - puzzle.Player.Timeline } );
 					}
 				}
 				else
 				{
 					for (int i = 0; i < 10; i++)
 					{
-						if (puzzle.Player.Timeline != i && KeyHelper.Pressed(Keys.D1 + i))
+						if (puzzle.Player.Timeline != i && KeyHelper.Pressed(Keys.D1 + i) )
 						{
-							manager.Execute(new JumpCommand(), i);
+							manager.Execute(new JumpCommand(), new int[] { i } );
 							break;
 						}
 					}
@@ -143,7 +144,7 @@ namespace TemporalThievery.Gameplay
 			{
 				if (puzzle.Branches != 0)
 				{
-					manager.Execute(new BranchCommand());
+					manager.Execute(new BranchCommand(), new int[0]);
 				}
 			}
 

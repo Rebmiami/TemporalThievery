@@ -8,11 +8,11 @@ namespace TemporalThievery.Commands
 {
 	public class BranchCommand : Command
 	{
-		public override void Execute(PuzzleState puzzle, int arg = 0)
+		public override void Execute(PuzzleState puzzle, int[] args)
 		{
 			deltas.Push(new BranchDelta(puzzle));
 			puzzle.Branches--;
-			base.Execute(puzzle, arg);
+			base.Execute(puzzle, args);
 		}
 
 		public override void Undo(PuzzleState puzzle)

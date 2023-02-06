@@ -121,14 +121,21 @@ namespace TemporalThievery.Gameplay
 					case "Gate":
 						{
 							bool open = Channels[element.Channel] ^ element.Toggle;
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * (open ? 2 : 1), 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 							break;
 						}
 
 					case "MoneyBag":
 						{
 							bool open = Channels[element.Channel] ^ element.Toggle;
-							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 3, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * 1, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+							break;
+						}
+
+					case "OneWay":
+						{
+							int direction = element.Direction;
+							spriteBatch.Draw(Game1.GameTiles, origin + element.Position.ToVector2() * 8, new Rectangle(9 * direction, 9 * 3, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 							break;
 						}
 

@@ -21,6 +21,10 @@ namespace TemporalThievery
 		/// </summary>
 		OverlappingSolidObjects,
 		/// <summary>
+		/// The move attempted will result in a solid object moving the wrong way through a one-way wall.
+		/// </summary>
+		ObjectThroughOneWayWall,
+		/// <summary>
 		/// The move attempted will place the player off the board.
 		/// </summary>
 		PlayerOutOfBounds,
@@ -31,7 +35,12 @@ namespace TemporalThievery
 		/// <summary>
 		/// The move attempted will place the player inside of a wall.
 		/// </summary>
-		PLayerInWall,
+		PlayerInWall,
+		/// <summary>
+		/// The move attempted will result in the player moving the wrong way through a one-way wall.
+		/// </summary>
+		PlayerThroughOneWayWall,
+
 
 		/// <summary>
 		/// The move attempted will result in the destruction of all timelines, which will make the game impossible. (although there may be a new mechanic possible by allowing this - reconsider?)

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using TemporalThievery.Commands.Deltas;
 using TemporalThievery.Input;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery.Gameplay
 {
@@ -105,7 +106,7 @@ namespace TemporalThievery.Gameplay
 			}
 		}
 
-		public PuzzleStateLegality GetLegality()
+		public PuzzleStateLegality GetLegality(Stack<IDelta> deltas)
 		{
 
 
@@ -125,7 +126,7 @@ namespace TemporalThievery.Gameplay
 			}
 			if (playerTimeline.Layout[Player.Position.X, Player.Position.Y] == 0)
 			{
-				return PuzzleStateLegality.PLayerInWall;
+				return PuzzleStateLegality.PlayerInWall;
 			}
 
 			foreach (Timeline timeline in Timelines)
@@ -151,6 +152,26 @@ namespace TemporalThievery.Gameplay
 								return PuzzleStateLegality.ObjectInWall;
 							}
 						}
+					}
+
+					if (element.Type == "OneWay")
+					{
+						foreach (IDelta delta in deltas)
+						{
+							if (delta is PlayerDelta playerDelta 
+								&& element.Position == Player.Position
+								&& playerDelta.direction == DirectionHelper.Invert((Directions)element.Direction))
+							{
+								return PuzzleStateLegality.PlayerThroughOneWayWall;
+							}
+							if (delta is ElementDelta elemDelta
+								&& element.Position == elemDelta.newPosition
+								&& elemDelta.direction == DirectionHelper.Invert((Directions)element.Direction))
+							{
+								return PuzzleStateLegality.ObjectThroughOneWayWall;
+							}
+						}
+
 					}
 				}
 				if (timeline == playerTimeline)

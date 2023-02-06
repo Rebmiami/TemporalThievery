@@ -22,6 +22,7 @@ namespace TemporalThievery.Utils
 				Directions.Down => new Point(0, 1),
 				Directions.Left => new Point(-1, 0),
 				Directions.Right => new Point(1, 0),
+				Directions.None => new Point(0, 0),
 				_ => throw new ArgumentException("The provided direction is not valid.")
 			};
 
@@ -47,6 +48,7 @@ namespace TemporalThievery.Utils
 				Directions.Down => Directions.Up,
 				Directions.Left => Directions.Right,
 				Directions.Right => Directions.Left,
+				Directions.None => Directions.None,
 				_ => throw new ArgumentException("The provided direction is not valid.")
 			};
 		}

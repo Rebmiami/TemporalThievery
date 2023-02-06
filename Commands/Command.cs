@@ -19,7 +19,7 @@ namespace TemporalThievery.Commands
 		/// </summary>
 		/// <param name="puzzle"></param>
 		/// <param name="arg">The purpose of this argument depends on how the class implenting <see cref="Command"/> uses it.</param>
-		public virtual void Execute(PuzzleState puzzle, int arg = 0)
+		public virtual void Execute(PuzzleState puzzle, int[] args)
 		{
 			// Make sure to call base.Execute(puzzle, arg) so that deltas are executed
 			foreach (IDelta delta in deltas)

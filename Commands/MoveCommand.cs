@@ -10,10 +10,10 @@ namespace TemporalThievery.Commands
 {
 	class MoveCommand : Command
 	{
-		public override void Execute(PuzzleState puzzle, int arg)
+		public override void Execute(PuzzleState puzzle, int[] args)
 		{
 			Point oldPosition = puzzle.Player.Position;
-			Point newPosition = DirectionHelper.ShiftPoint(oldPosition, arg);
+			Point newPosition = DirectionHelper.ShiftPoint(oldPosition, args[0]);
 
 			if (puzzle.Timelines[puzzle.Player.Timeline].IsWalkableOrPushable(newPosition))
 			{
@@ -21,12 +21,12 @@ namespace TemporalThievery.Commands
 
 				if (pushable != null)
 				{
-					deltas.Push(new ElementDelta(puzzle, DirectionHelper.ShiftPoint(pushable.Position, arg), pushable));
+					deltas.Push(new ElementDelta(puzzle, DirectionHelper.ShiftPoint(pushable.Position, args[0]), pushable, (Directions)args[0]));
 				}
 			}
 
-			deltas.Push(new PlayerDelta(puzzle, newPosition, puzzle.Player.Timeline));
-			base.Execute(puzzle, arg);
+			deltas.Push(new PlayerDelta(puzzle, newPosition, puzzle.Player.Timeline, (Directions)args[0]));
+			base.Execute(puzzle, args);
 		}
 
 		public override void Undo(PuzzleState puzzle)
