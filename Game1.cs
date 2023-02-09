@@ -71,6 +71,8 @@ namespace TemporalThievery
 			}
 
 			KeyHelper.Update();
+			MouseHelper.Update();
+			GamePadHelper.Update();
 
 			base.Update(gameTime);
 		}

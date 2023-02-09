@@ -16,13 +16,20 @@ namespace TemporalThievery.PuzzleEditor
 	/// </summary>
 	internal class EditorTimelineRenderer
 	{
+		public int totalDrawWidth = 0;
+
+
 		public void DrawState(PuzzleState state, SpriteBatch spriteBatch, Vector3 cursor)
 		{
 			bool specialJumpMode = KeyHelper.Down(Keys.X) && state.Timelines.Count > 2;
 			Vector2 origin = new Vector2(60, 15);
 			for (int i = 0; i < state.Timelines.Count; i++)
 			{
+
 				Timeline timeline = state.Timelines[i];
+
+				totalDrawWidth = (int)(origin.X + timeline.Dimensions.X * 8);
+
 				timeline.DrawDebug(spriteBatch, origin);
 
 				if (state.Timelines[state.Player.Timeline] == timeline)

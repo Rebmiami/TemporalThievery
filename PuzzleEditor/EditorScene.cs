@@ -28,14 +28,22 @@ namespace TemporalThievery.PuzzleEditor
 		EditorTimelineRenderer renderer;
 
 		Vector3 cursor;
+		List<Element> elemsUnderCursor;
+		int underCursorIndex;
+
+		bool wasDragging;
+		Element draggingElement;
 
 		/// <summary>
-		/// Loads the puzzle state into the editor.
+		/// Initializes the puzzle into editing mode after loading a puzzle
 		/// </summary>
-		/// <param name="puzzleState"></param>
-		public void Initialize(PuzzleState puzzleState)
+		public void Initialize()
 		{
-			editingState = (PuzzleState)puzzleState.Clone();
+			elemsUnderCursor = new List<Element>();
+			underCursorIndex = 0;
+			cursor = Vector3.Zero;
+			renderer = new EditorTimelineRenderer();
+			state = EditorState.Edit;
 		}
 
 		public void Playtest()
@@ -84,9 +92,8 @@ namespace TemporalThievery.PuzzleEditor
 									string json = File.ReadAllText(filePath);
 									PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
 									editingState = puzzleLoader.ToPuzzle();
-									cursor = Vector3.Zero;
-									renderer = new EditorTimelineRenderer();
-									state = EditorState.Edit;
+
+									Initialize();
 								}
 							}
 						}
@@ -99,37 +106,25 @@ namespace TemporalThievery.PuzzleEditor
 						Playtest();
 					}
 
-					if (KeyHelper.Pressed(Keys.Up))
-					{
-						if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.LeftShift))
-						{
-							SetCursorPosition(cursor.X, cursor.Y, cursor.Z - 1);
-						}
-						else
-						{
-							SetCursorPosition(cursor.X, cursor.Y - 1, cursor.Z);
-						}
-					}
-					if (KeyHelper.Pressed(Keys.Down))
-					{
-						if (KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.LeftShift))
-						{
+					bool drag = KeyHelper.Down(Keys.LeftShift) || KeyHelper.Down(Keys.RightShift);
 
-							SetCursorPosition(cursor.X, cursor.Y, cursor.Z + 1);
-						}
-						else
-						{
-							SetCursorPosition(cursor.X, cursor.Y + 1, cursor.Z);
-						}
-					}
+					if (KeyHelper.Pressed(Keys.Up))
+						SetCursorPosition(cursor.X, cursor.Y - 1, cursor.Z, drag);
+
+					if (KeyHelper.Pressed(Keys.Down))
+						SetCursorPosition(cursor.X, cursor.Y + 1, cursor.Z, drag);
+
 					if (KeyHelper.Pressed(Keys.Left))
-					{
-						SetCursorPosition(cursor.X - 1, cursor.Y, cursor.Z);
-					}
+						SetCursorPosition(cursor.X - 1, cursor.Y, cursor.Z, drag);
+
 					if (KeyHelper.Pressed(Keys.Right))
-					{
-						SetCursorPosition(cursor.X + 1, cursor.Y, cursor.Z);
-					}
+						SetCursorPosition(cursor.X + 1, cursor.Y, cursor.Z, drag);
+
+					if (KeyHelper.Pressed(Keys.OemComma))
+						SetCursorPosition(cursor.X, cursor.Y, cursor.Z - 1);
+
+					if (KeyHelper.Pressed(Keys.OemPeriod))
+						SetCursorPosition(cursor.X, cursor.Y, cursor.Z + 1);
 
 					if (KeyHelper.Pressed(Keys.W))
 					{
@@ -143,6 +138,16 @@ namespace TemporalThievery.PuzzleEditor
 					{
 						editingState.Player.Position = new Point((int)cursor.X, (int)cursor.Y);
 						editingState.Player.Timeline = (int)cursor.Z;
+					}
+
+					if (elemsUnderCursor.Count > 0 && MouseHelper.Scroll() != 0)
+					{
+						underCursorIndex += Math.Sign((int)MouseHelper.Scroll());
+						underCursorIndex %= elemsUnderCursor.Count;
+						if (underCursorIndex < 0)
+						{
+							underCursorIndex = elemsUnderCursor.Count - 1;
+						}
 					}
 
 
@@ -164,7 +169,7 @@ namespace TemporalThievery.PuzzleEditor
 			base.Update(gameTime);
 		}
 
-		public void SetCursorPosition(float x, float y, float t)
+		public void SetCursorPosition(float x, float y, float t, bool drag = false)
 		{
 			cursor.X = x;
 			cursor.Y = y;
@@ -179,6 +184,33 @@ namespace TemporalThievery.PuzzleEditor
 			Point dims = editingState.Timelines[(int)cursor.Z].Dimensions;
 			cursor.Y = Math.Clamp(cursor.Y, 0, dims.Y - 1);
 			cursor.X = Math.Clamp(cursor.X, 0, dims.X - 1);
+
+			if (drag && !wasDragging && elemsUnderCursor.Count > 0)
+			{
+				draggingElement = elemsUnderCursor[underCursorIndex];
+			}
+
+			if (!drag)
+			{
+				draggingElement = null;
+			}
+
+			wasDragging = drag;
+
+			if (wasDragging && draggingElement != null)
+			{
+				draggingElement.Position = new Vector2(cursor.X, cursor.Y).ToPoint();
+			}
+
+			elemsUnderCursor.Clear();
+			underCursorIndex = 0;
+			foreach (Element element in editingState.Timelines[(int)cursor.Z].Elements)
+			{
+				if (element.Position.X == cursor.X && element.Position.Y == cursor.Y)
+				{
+					elemsUnderCursor.Add(element);
+				}
+			}
 		}
 
 		public override void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget)
@@ -199,6 +231,29 @@ namespace TemporalThievery.PuzzleEditor
 
 					renderer.DrawState(editingState, spriteBatch, cursor);
 					// editingState.Draw(spriteBatch);
+
+					Timeline editingTimeline = editingState.Timelines[(int)cursor.Z];
+
+					if (wasDragging && draggingElement != null)
+					{
+						Vector2 position = new Vector2(renderer.totalDrawWidth + 4, 10);
+						spriteBatch.DrawString(Game1.TestFont, "Moving an element...", position, Color.White);
+					}
+					else
+					{
+
+						for (int i = 0; i < elemsUnderCursor.Count; i++)
+						{
+							Element element = elemsUnderCursor[i];
+							Vector2 position = new Vector2(renderer.totalDrawWidth + 4, 10 + i * 10);
+							editingTimeline.DrawElementDebug(spriteBatch, position, element);
+							if (i == underCursorIndex)
+							{
+								spriteBatch.DrawString(Game1.TestFont, "<", position + new Vector2(10, 0), Color.White);
+							}
+						}
+					}
+
 
 					spriteBatch.End();
 					break;
