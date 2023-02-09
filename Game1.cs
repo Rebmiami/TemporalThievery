@@ -43,6 +43,8 @@ namespace TemporalThievery
 		public static Texture2D EditorCursor;
 		public static SpriteFont TestFont;
 
+		public static List<Color> colors;
+
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -51,6 +53,9 @@ namespace TemporalThievery
 			HUDIcons = Content.Load<Texture2D>("HUDIcons");
 			TestFont = Content.Load<SpriteFont>("TestFont");
 			EditorCursor = Content.Load<Texture2D>("EditorCursor");
+
+			string json = File.ReadAllText("./Data/Colors.json");
+			colors = JsonSerializer.Deserialize<List<Color>>(json);
 
 			// TODO: use this.Content to load your game content here
 		}

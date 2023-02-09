@@ -120,14 +120,16 @@ namespace TemporalThievery.Gameplay
 
 				case "Pad":
 					{
-						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 0, 9 * 1, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
+						int channel = element.Channel;
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 0, 9 * 1, 8, 8), Game1.colors[channel + 2], 0, Vector2.Zero, 1, SpriteEffects.None, 0.3f);
 						break;
 					}
 
 				case "Gate":
 					{
-						bool open = Channels[element.Channel] ^ element.Toggle;
-						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+						int channel = element.Channel;
+						bool open = Channels[channel] ^ element.Toggle;
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Game1.colors[channel + 2], 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
 						break;
 					}
 
