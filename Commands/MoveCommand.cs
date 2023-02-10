@@ -15,17 +15,22 @@ namespace TemporalThievery.Commands
 			Point oldPosition = puzzle.Player.Position;
 			Point newPosition = DirectionHelper.ShiftPoint(oldPosition, args[0]);
 
+			deltas.Push(new PlayerDelta(puzzle, newPosition, puzzle.Player.Timeline, (Directions)args[0]));
+
 			if (puzzle.Timelines[puzzle.Player.Timeline].IsWalkableOrPushable(newPosition))
 			{
 				Element pushable = puzzle.Timelines[puzzle.Player.Timeline].GetPushable(newPosition);
 
-				if (pushable != null)
+				while (pushable != null)
 				{
-					deltas.Push(new ElementDelta(puzzle, DirectionHelper.ShiftPoint(pushable.Position, args[0]), pushable, (Directions)args[0]));
+					if (pushable != null)
+					{
+						deltas.Push(new ElementDelta(puzzle, DirectionHelper.ShiftPoint(pushable.Position, args[0]), pushable, (Directions)args[0]));
+					}
+					DirectionHelper.ShiftPoint(ref newPosition, args[0]);
+					pushable = puzzle.Timelines[puzzle.Player.Timeline].GetPushable(newPosition);
 				}
 			}
-
-			deltas.Push(new PlayerDelta(puzzle, newPosition, puzzle.Player.Timeline, (Directions)args[0]));
 			base.Execute(puzzle, args);
 		}
 
