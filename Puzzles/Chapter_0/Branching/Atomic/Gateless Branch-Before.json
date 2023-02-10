@@ -1,0 +1,42 @@
+{
+	"Name": "Gateless Branch-Before",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 0, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 5, 2 ]
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 5, 2 ],
+					"Direction": 0
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1 ],
+				[ 0, 0, 0, 0, 0, 1 ],
+				[ 1, 1, 1, 0, 0, 1 ],
+				[ 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 0, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 3 ]
+	}
+}

@@ -1,0 +1,47 @@
+{
+	"Name": "Gateless Branch-After",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 6, 2 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 4, 1 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 1 ]
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 2, 1 ],
+					"Direction": 3
+				}
+			],
+			"Layout": [
+				[ 0, 0, 0, 1, 0, 0, 0 ],
+				[ 0, 0, 0, 1, 1, 1, 1 ],
+				[ 0, 0, 0, 1, 0, 0, 1 ],
+				[ 1, 1, 1, 1, 0, 0, 0 ],
+				[ 1, 1, 1, 0, 0, 0, 0 ],
+				[ 1, 1, 1, 0, 0, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 3 ]
+	}
+}

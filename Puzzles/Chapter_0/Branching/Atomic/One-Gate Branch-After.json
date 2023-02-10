@@ -1,0 +1,70 @@
+{
+	"Name": "One-Gate Branch-After",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 5, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 0 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 7, 4 ]
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 4, 0 ],
+					"Toggle": false,
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 1, 2 ],
+					"Toggle": false,
+					"Channel": 1
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 7, 1 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 0, 0 ],
+					"Channel": 1
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 7, 4 ],
+					"Direction": 0
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 ],
+				[ 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0, 0, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 3, 5 ]
+	}
+}

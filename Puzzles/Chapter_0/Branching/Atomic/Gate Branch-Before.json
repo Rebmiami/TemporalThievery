@@ -1,0 +1,48 @@
+{
+	"Name": "Gate Branch-Before",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": -1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 0, 0 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 6, 3 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 1, 0 ],
+					"Toggle": true,
+					"Channel": 0
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 5, 3 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1, 0 ],
+				[ 0, 0, 0, 0, 0, 1, 0 ],
+				[ 1, 1, 1, 0, 0, 1, 0 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 0, 0, 1, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 3 ]
+	}
+}
