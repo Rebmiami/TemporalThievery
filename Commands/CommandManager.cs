@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using TemporalThievery.Commands.Deltas;
 using TemporalThievery.Gameplay;
@@ -40,7 +41,10 @@ namespace TemporalThievery.Commands
 
 			command.Execute(tempPuzzle, args);
 			tempPuzzle.Refresh();
-			if (tempPuzzle.GetLegality(command.deltas) == PuzzleStateLegality.Legal)
+
+			PuzzleStateLegality legality = tempPuzzle.GetLegality(command.deltas);
+
+			if (legality == PuzzleStateLegality.Legal)
 			{
 				command.deltas.Clear();
 				command.Execute(puzzle, args);
@@ -55,9 +59,11 @@ namespace TemporalThievery.Commands
 
 				commands.Push(command);
 
-
-
 				puzzle.Refresh();
+			}
+			else
+			{
+				Debug.WriteLine("Move could not be executed because: " + legality);
 			}
 		}
 
