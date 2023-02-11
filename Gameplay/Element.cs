@@ -41,6 +41,12 @@ namespace TemporalThievery
 		/// </summary>
 		public byte BindChannel;
 
+		/// <summary>
+		/// Used exclusively by lasers. Value is determined by puzzle state and not assigned by puzzle file. <br />
+		/// Indicates how many tiles the laser will travel before it hits a solid object.
+		/// </summary>
+		public int LaserLength;
+
 		public object Clone()
 		{
 			return new Element
@@ -50,7 +56,8 @@ namespace TemporalThievery
 				Channel = Channel,
 				Toggle = Toggle,
 				Direction = Direction,
-				BindChannel = BindChannel
+				BindChannel = BindChannel,
+				LaserLength = LaserLength
 			};
 		}
 

@@ -114,7 +114,7 @@ namespace TemporalThievery.Gameplay
 			{
 				case "Safe":
 					{
-						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 4, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
 						break;
 					}
 
@@ -147,6 +147,12 @@ namespace TemporalThievery.Gameplay
 						break;
 					}
 
+				case "Crate":
+					{
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
+						break;
+					}
+
 				default:
 					{
 						break;
@@ -165,7 +171,7 @@ namespace TemporalThievery.Gameplay
 			{
 				return true;
 			}
-			if (element.Type == "Safe" || element.Type == "Anchor")
+			if (element.Type == "Safe" || element.Type == "Anchor" || element.Type == "Crate")
 			{
 				return true;
 			}
@@ -245,7 +251,7 @@ namespace TemporalThievery.Gameplay
 		{
 			foreach (Element element in Elements)
 			{
-				if (element.Position == point && element.Type == "Safe" || element.Type == "Anchor")
+				if (element.Position == point && (element.Type == "Safe" || element.Type == "Anchor" || element.Type == "Crate"))
 				{
 					return element;
 				}

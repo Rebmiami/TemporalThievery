@@ -29,6 +29,11 @@ namespace TemporalThievery.Commands
 					}
 					DirectionHelper.ShiftPoint(ref newPosition, args[0]);
 					pushable = puzzle.Timelines[puzzle.Player.Timeline].GetPushable(newPosition);
+
+					if (pushable != null && pushable.Type == "Safe")
+					{
+						break;
+					}
 				}
 			}
 			base.Execute(puzzle, args);
