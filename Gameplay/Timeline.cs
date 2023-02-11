@@ -62,7 +62,7 @@ namespace TemporalThievery.Gameplay
 			{
 				// Makes sure that only safes are checked.
 				// Should anchors also be checked?
-				if (element.Type == "Safe")
+				if (element.Type == "Safe" || element.Type == "Crate")
 					foreach (Element pad in pads)
 					{
 						// If the pad's channel is already active, there is no need to check again.

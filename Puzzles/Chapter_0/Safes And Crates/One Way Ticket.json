@@ -1,0 +1,47 @@
+{
+	"Name": "One Way Ticket",
+
+	"CashGoal": 1,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "Crate",
+					"Position": [ 3, 3 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 2, 3 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 2, 3 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 1, 3 ],
+					"Channel": 0,
+					"Toggle": false
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 0, 0, 1, 1, 1, 1 ],
+				[ 1, 1, 0, 0, 1, 1, 1, 1 ],
+				[ 0, 1, 1, 1, 1, 1, 1, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 6, 1 ]
+	}
+}

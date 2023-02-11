@@ -1,0 +1,88 @@
+{
+	"Name": "Great Switcheroo",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": 1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "Safe",
+					"Position": [ 5, 3 ]
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 5, 1 ]
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 2, 2 ]
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 4, 3 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 5, 3 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 6, 3 ],
+					"Channel": 1
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 2, 2 ],
+					"Channel": 2
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 8, 1 ],
+					"Channel": 0,
+					"Toggle": false
+				},
+				{
+					"Type": "MoneyBag",
+					"Position": [ 7, 1 ]
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 6, 1 ],
+					"Channel": 1,
+					"Toggle": false
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 5, 1 ],
+					"Channel": 2,
+					"Toggle": false
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 4, 3 ],
+					"Direction": 3
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 0, 0, 0, 0 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 3 ]
+	}
+}
