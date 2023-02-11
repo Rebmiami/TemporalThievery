@@ -1,0 +1,62 @@
+{
+	"Name": "Keyhole",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": 1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "Crate",
+					"Position": [ 4, 1 ]
+				},
+				{
+					"Type": "MoneyBag",
+					"Position": [ 1, 3 ]
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 5, 1 ]
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 3, 1 ],
+					"Direction": 2
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 4, 2 ],
+					"Direction": 0
+				},
+				{
+					"Type": "Laser",
+					"Position": [ 4, 0 ],
+					"Direction": 1
+				},
+				{
+					"Type": "Laser",
+					"Position": [ 0, 1 ],
+					"Direction": 3
+				}
+			],
+			"Layout": [
+				[ 0, 0, 0, 0, 1, 0, 0, 0 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 0, 1, 0, 0, 1, 0, 0, 0 ],
+				[ 0, 1, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 0, 1, 1, 1, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 4, 4 ]
+	}
+}
