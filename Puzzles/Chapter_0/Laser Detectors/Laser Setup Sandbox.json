@@ -1,0 +1,105 @@
+{
+	"Name": "Laser Setup Sandbox",
+
+	"CashGoal": 1,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "Laser",
+					"Position": [ 6, 1 ],
+					"Direction": 2
+				},
+				{
+					"Type": "Laser",
+					"Position": [ 6, 2 ],
+					"Direction": 2
+				},
+				{
+					"Type": "Laser",
+					"Position": [ 6, 3 ],
+					"Direction": 2
+				},
+				{
+					"Type": "Laser",
+					"Position": [ 6, 4 ],
+					"Direction": 2
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 1, 1 ],
+					"Direction": 0
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 1, 2 ],
+					"Direction": 1
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 1, 3 ],
+					"Direction": 2
+				},
+				{
+					"Type": "OneWay",
+					"Position": [ 1, 4 ],
+					"Direction": 3
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 3, 5 ]
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 2, 5 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 5, 5 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 5, 1 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 5, 2 ],
+					"Channel": 0,
+					"Toggle": true
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 5, 3 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 5, 4 ],
+					"Channel": 0
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 5 ]
+	}
+}

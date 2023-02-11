@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TemporalThievery.Commands.Deltas;
 using TemporalThievery.Input;
 using TemporalThievery.Utils;
@@ -172,6 +173,18 @@ namespace TemporalThievery.Gameplay
 							}
 						}
 
+					}
+					if (timeline == playerTimeline && element.Type == "Laser")
+					{
+						for (int i = 0; i < element.LaserLength; i++)
+						{
+							Point laserPoint = element.Position + DirectionHelper.ToPoint(element.Direction) * new Point(i);
+							if (laserPoint == Player.Position)
+							{
+								return PuzzleStateLegality.Caught;
+							}
+
+						}
 					}
 				}
 				if (timeline == playerTimeline)

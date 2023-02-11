@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery.Gameplay
 {
@@ -85,6 +86,42 @@ namespace TemporalThievery.Gameplay
 						}
 					}
 			}
+
+			foreach (Element element in Elements)
+			{
+				if (element.Type == "Laser")
+				{
+					element.LaserLength = 0;
+
+
+					for (int i = 0; i < 100; i++) // Do`n't ininite loop
+					{
+						Point laserPoint = element.Position + DirectionHelper.ToPoint(element.Direction) * new Point(element.LaserLength);
+
+						foreach (Element obstacle in Elements)
+						{
+							if (obstacle.Position == laserPoint)
+							{
+								if (IsElementSolid(obstacle))
+								{
+									goto HitObstacle;
+								}
+								if (obstacle.Type == "OneWay" && obstacle.Direction == (int)DirectionHelper.Invert((Directions)element.Direction))
+								{
+									goto HitObstacle;
+								}
+							}
+							if (!InBounds(laserPoint) || Layout[laserPoint.X, laserPoint.Y] == 0)
+							{
+								goto HitObstacle;
+							}
+						}
+						element.LaserLength++;
+					}
+					HitObstacle:;
+
+				}
+			}
 		}
 
 		public void DrawDebug(SpriteBatch spriteBatch, Vector2 origin)
@@ -147,6 +184,18 @@ namespace TemporalThievery.Gameplay
 						break;
 					}
 
+				case "Laser":
+					{
+						int direction = element.Direction;
+						int laserLength = element.LaserLength;
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * direction, 9 * 4, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1.0f);
+						for (int i = 0; i < laserLength; i++)
+						{
+							spriteBatch.Draw(Game1.GameTilesDebug, origin + DirectionHelper.ToPoint(direction).ToVector2() * i * 8, new Rectangle(9 * direction, 9 * 5, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.9f);
+						}
+						break;
+					}
+
 				case "Crate":
 					{
 						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * 3, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.6f);
@@ -197,7 +246,7 @@ namespace TemporalThievery.Gameplay
 		public bool IsWalkable(int x, int y)
 		{
 			// You are never allowed to leave the board.
-			if (x < 0 || y < 0 || x >= Dimensions.X || y >= Dimensions.Y)
+			if (!InBounds(x, y))
 			{
 				return false;
 			}
@@ -245,6 +294,13 @@ namespace TemporalThievery.Gameplay
 		public bool IsUnwalkableOrPushable(int x, int y)
 		{
 			return !IsWalkable(x, y) || GetPushable(x, y) != null;
+		}
+
+		public bool InBounds(Point point) => InBounds(point.X, point.Y);
+
+		public bool InBounds(int x, int y)
+		{
+			return x >= 0 && y >= 0 && x < Dimensions.X && y < Dimensions.Y;
 		}
 
 		public Element GetPushable(Point point)

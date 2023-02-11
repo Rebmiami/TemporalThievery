@@ -52,7 +52,7 @@ namespace TemporalThievery
 		TooManyTimelines,
 
 		/// <summary>
-		/// No moves except undo are allowed because the player has been caught by a security camera.
+		/// The move attempted will put the player in the line of sight of a detector laser.
 		/// </summary>
 		Caught,
 
