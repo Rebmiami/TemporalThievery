@@ -129,6 +129,16 @@ namespace TemporalThievery.Gameplay
 			{
 				return PuzzleStateLegality.PlayerInWall;
 			}
+			if (playerTimeline.Layout[Player.Position.X, Player.Position.Y] == 2)
+			{
+				foreach (IDelta delta in deltas)
+				{
+					if (delta is PlayerDelta playerDelta && playerDelta.newTimeline != playerDelta.oldTimeline)
+					{
+						return PuzzleStateLegality.Grate;
+					}
+				}
+			}
 
 			foreach (Timeline timeline in Timelines)
 			{
@@ -172,7 +182,6 @@ namespace TemporalThievery.Gameplay
 								return PuzzleStateLegality.ObjectThroughOneWayWall;
 							}
 						}
-
 					}
 					if (timeline == playerTimeline && element.Type == "Laser")
 					{

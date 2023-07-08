@@ -1,0 +1,44 @@
+{
+	"Name": "Grate Test",
+
+	"CashGoal": 1,
+	"MaxTimeline": 3,
+	"Jump": -1,
+	"Branch": 1,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+			],
+			"Layout": [
+				[ 1, 1, 1, 2, 2 ],
+				[ 1, 1, 1, 2, 2 ],
+				[ 1, 1, 1, 2, 2 ],
+				[ 1, 1, 1, 2, 2 ],
+				[ 1, 1, 1, 2, 2 ]
+			]
+		},
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 3, 2 ]
+				}
+			],
+			"Layout": [
+				[ 2, 2, 1, 1, 1 ],
+				[ 2, 2, 1, 1, 1 ],
+				[ 2, 2, 1, 1, 1 ],
+				[ 2, 2, 1, 1, 1 ],
+				[ 2, 2, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 2 ]
+	}
+}

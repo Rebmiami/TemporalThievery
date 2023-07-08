@@ -64,5 +64,9 @@ namespace TemporalThievery
 		/// Cannot jump to a timeline because it contains multiple active anchors.
 		/// </summary>
 		AnchorSplit,
+		/// <summary>
+		/// Cannot jump onto a tile containing a grate.
+		/// </summary>
+		Grate,
 	}
 }

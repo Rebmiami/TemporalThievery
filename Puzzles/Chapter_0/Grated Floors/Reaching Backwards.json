@@ -1,0 +1,92 @@
+{
+	"Name": "Reaching Backwards",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": 2,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 0, 1 ]
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 1, 1 ],
+					"Toggle": false,
+					"Channel": 1
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 3, 3 ],
+					"Toggle": false,
+					"Channel": 1
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 3, 6 ],
+					"Channel": 1
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 4, 6 ]
+				}
+			],
+			"Layout": [
+				[ 0, 0, 2, 2, 2, 0, 0 ],
+				[ 1, 1, 2, 2, 2, 0, 0 ],
+				[ 0, 0, 2, 2, 2, 0, 0 ],
+				[ 0, 0, 0, 2, 0, 0, 0 ],
+				[ 0, 0, 2, 2, 2, 0, 0 ],
+				[ 0, 0, 2, 2, 2, 0, 0 ],
+				[ 0, 0, 2, 2, 2, 2, 1 ]
+			]
+		},
+		{
+			"Elements": [
+				{
+					"Type": "Gate",
+					"Position": [ 5, 6 ],
+					"Toggle": false,
+					"Channel": 0
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 3, 6 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 5 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 3, 4 ]
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 4, 5 ]
+				}
+			],
+			"Layout": [
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 1, 2 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 3, 1 ]
+	}
+}

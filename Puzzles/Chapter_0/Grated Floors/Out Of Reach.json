@@ -1,0 +1,84 @@
+{
+	"Name": "Out Of Reach",
+
+	"CashGoal": 1,
+	"MaxTimeline": 2,
+	"Jump": 3,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "Gate",
+					"Position": [ 3, 1 ],
+					"Toggle": true,
+					"Channel": 0
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 1, 6 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 1, 6 ]
+				}
+			],
+			"Layout": [
+				[ 1, 1, 1, 0, 0 ],
+				[ 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 0, 0 ],
+				[ 0, 1, 0, 0, 0 ],
+				[ 1, 1, 1, 0, 0 ],
+				[ 1, 1, 0, 0, 0 ],
+				[ 1, 2, 1, 0, 0 ]
+			]
+		},
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 1, 1 ]
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 3, 1 ],
+					"Toggle": true,
+					"Channel": 1
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 2, 5 ],
+					"Toggle": false,
+					"Channel": 1
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 1, 6 ],
+					"Channel": 1
+				},
+				{
+					"Type": "Safe",
+					"Position": [ 1, 6 ]
+				}
+			],
+			"Layout": [
+				[ 2, 2, 2, 0, 0 ],
+				[ 2, 2, 2, 1, 1 ],
+				[ 2, 2, 2, 0, 0 ],
+				[ 0, 0, 0, 0, 0 ],
+				[ 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 0, 0 ],
+				[ 2, 2, 1, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 1, 1 ]
+	}
+}

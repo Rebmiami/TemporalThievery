@@ -131,9 +131,15 @@ namespace TemporalThievery.Gameplay
 				bool checker = i % 2 == 0;
 				for (int j = 0; j < Dimensions.Y; j++)
 				{
-					if (Layout[i, j] == 1)
+					if (Layout[i, j] != 0)
 					{
-						spriteBatch.Draw(Game1.GameTilesDebug, origin + new Vector2(i * 8, j * 8), new Rectangle(9 * (checker ? 0 : 1), 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0f);
+						Vector2 variantOffset = Layout[i, j] switch
+						{
+							1 => new Vector2(0, 0),
+							2 => new Vector2(5, 0),
+							_ => throw new Exception("Invalid tile type")
+						};
+						spriteBatch.Draw(Game1.GameTilesDebug, origin + new Vector2(i * 8, j * 8), new Rectangle(9 * (checker ? 0 : 1) + (int)variantOffset.X * 9, 9 * 0 + (int)variantOffset.Y * 9, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0f);
 					}
 					checker = !checker;
 				}
