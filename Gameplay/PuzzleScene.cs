@@ -155,7 +155,7 @@ namespace TemporalThievery.Gameplay
 			{
 				if (puzzle.Branches != 0)
 				{
-					manager.Execute(new BranchCommand(), new int[0]);
+					manager.Execute(new BranchCommand(), Array.Empty<int>());
 				}
 			}
 
