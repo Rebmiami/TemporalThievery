@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layer id="root">
+  <layer id="smileyBox" x="10" y="10" scale="2">
+    <layer id="smiley1" scale="1" source="smiley" x="0" y="0"></layer>
+    <layer id="smiley2" scale="1" source="smiley" x="30" y="0"></layer>
+    <layer id="smiley3" scale="1" source="smiley" x="0" y="30"></layer>
+    <layer id="smiley4" scale="1" source="smiley" x="30" y="30"></layer>
+  </layer>
+  <layer id="smileyBox2" x="10" y="10">
+    <layer id="smiley5" source="smiley" x="0" y="0"></layer>
+    <layer id="smiley6" source="smiley" x="30" y="0" scalex="1.5"></layer>
+    <layer id="smiley7" source="smiley" x="0" y="30" scaley="1.5"></layer>
+    <layer id="smiley8" source="smiley" x="30" y="30" scale="1.5"></layer>
+  </layer>
+</layer>

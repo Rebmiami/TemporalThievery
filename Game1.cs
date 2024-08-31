@@ -12,6 +12,7 @@ using TemporalThievery.Utils;
 using TemporalThievery.Scenes;
 using TemporalThievery.Gameplay;
 using TemporalThievery.PuzzleEditor;
+using Trireme;
 
 namespace TemporalThievery
 {
@@ -19,6 +20,7 @@ namespace TemporalThievery
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch spriteBatch;
+		private RendererRoot root;
 
 		public Game1()
 		{
@@ -57,6 +59,11 @@ namespace TemporalThievery
 			string json = File.ReadAllText("./Data/Colors.json");
 			colors = JsonSerializer.Deserialize<List<Color>>(json);
 
+
+			root = new RendererRoot(GraphicsDevice, Content);
+			string xml = File.ReadAllText("./Demos/Demo1.xml");
+			root.LoadXML(xml);
+
 			// TODO: use this.Content to load your game content here
 		}
 
@@ -85,6 +92,8 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
+			// root.Draw();
+
 			// TODO: Create a dedicated class for drawing timelines properly
 			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
 			GraphicsDevice.SetRenderTarget(renderTarget);
