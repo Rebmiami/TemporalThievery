@@ -70,10 +70,10 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core 6.0
+    - name: Install .NET Core 8.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     #- name: Setup MSBuild.exe
@@ -94,7 +94,7 @@ jobs:
       uses: igotinfected-ci/build-monogame@v2.0.3
       with:
         # .NET version to set up `dotnet` with. Defaults to `3.1.x`.
-        dotnet-version: 6.0.x # optional, default is 3.1.x
+        dotnet-version: 8.0.x # optional, default is 3.1.x
         # Path to the `.sln`. Used to restore NuGet packages from.
         solution-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.sln
         # Path to the `Content.mgcb` file for a specific project. Used to build the MonoGame content files.
