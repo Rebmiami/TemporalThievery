@@ -94,7 +94,7 @@ jobs:
       uses: igotinfected-ci/build-monogame@v2.0.3
       with:
         # .NET version to set up `dotnet` with. Defaults to `3.1.x`.
-        dotnet-version: 8.0.x # optional, default is 3.1.x
+        dotnet-version: 3.1.x # optional, default is 3.1.x
         # Path to the `.sln`. Used to restore NuGet packages from.
         solution-path: D:\a\TemporalThievery\TemporalThievery\TemporalThievery.sln
         # Path to the `Content.mgcb` file for a specific project. Used to build the MonoGame content files.
