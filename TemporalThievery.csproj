@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <TieredCompilation>true</TieredCompilation>
-    <Platforms>AnyCPU;x86</Platforms>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
+    <Platforms>AnyCPU;x64</Platforms>
     <SelfContained>true</SelfContained>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>

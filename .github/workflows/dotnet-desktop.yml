@@ -70,10 +70,10 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Install .NET Core 6.0
+    - name: Install .NET Core 8.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     #- name: Setup MSBuild.exe
@@ -128,7 +128,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: TemporalThievery_${{ matrix.configuration }}
-        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net6.0-windows\win-x86
+        path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net8.0-windows\win-x64
         
     - uses: actions/download-artifact@v3
       with:

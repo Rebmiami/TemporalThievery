@@ -32,7 +32,7 @@ namespace TemporalThievery
 		protected override void Initialize()
 		{
 			PuzzleScene newScene = new PuzzleScene();
-			newScene.InitializePuzzleFromFilePath(@".\Puzzles\Chapter_0\Pads And Gates\Just Another Tile Puzzler.json");
+			newScene.InitializePuzzleFromFilePath("./Puzzles/Chapter_0/Pads And Gates/Just Another Tile Puzzler.json");
 			activeScene = newScene;
 			// TODO: Add your initialization logic here
 
