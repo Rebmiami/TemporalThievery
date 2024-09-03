@@ -25,13 +25,13 @@ namespace TemporalThievery.Utils
         public override void Update(GameTime gameTime)
 		{
             
-			if (KeyHelper.Pressed(Keys.Left))
+			if (KeyHelper.Pressed(Keys.Left) || KeyHelper.Pressed(Keys.A))
 			{
 				browser.MoveUpDirectory();
 			}
             if (browser.currentDirItems.Count > 0)
             {
-                if (KeyHelper.Pressed(Keys.Right) && browser.currentDirItems.Count > 0)
+                if ((KeyHelper.Pressed(Keys.Right) || KeyHelper.Pressed(Keys.D) || KeyHelper.Pressed(Keys.Enter)) && browser.currentDirItems.Count > 0)
 			    {
 			    	try
 			    	{
@@ -47,11 +47,11 @@ namespace TemporalThievery.Utils
 			    	}
 			    	catch (InvalidOperationException) { }
 			    }
-			    else if (KeyHelper.Pressed(Keys.Up))
+			    else if (KeyHelper.Pressed(Keys.Up) || KeyHelper.Pressed(Keys.W))
 			    {
 			    	browser.MoveCursorUp();
 			    }
-			    else if (KeyHelper.Pressed(Keys.Down))
+			    else if (KeyHelper.Pressed(Keys.Down) || KeyHelper.Pressed(Keys.S))
 			    {
 			    	browser.MoveCursorDown();
 			    }
