@@ -2,6 +2,18 @@
 Temporal Thievery is a bank robbing puzzle game with time travel.
 Rob your way through the wild west, modern banks, top-secret government facilities, and more by solving puzzles and jumping across timelines.
 
+## Table Of Contents
+
+- [How to compile Temporal Thievery](#how-to-compile-temporal-thievery)
+- [How to play Temporal Thievery](#how-to-play-temporal-thievery)
+
+### How to compile Temporal Thievery
+In order to compile the game, you will need to install MonoGame and .NET 8.0. If use VSCode, the project settings should allow you to simply press F5 to run the game on Windows and Linux (other platforms and IDEs not yet tested). Otherwise, you can use `dotnet build` to build the project from the command line.
+
+Additionally, the `trireme` branch requires access to the Trireme library, which is incomplete and has not yet been released as of the writing of this document.
+
+### How to play Temporal Thievery
+
 **If you want to try the most recent build of Temporal Thievery, go to [this page](https://github.com/Rebmiami/TemporalThievery/releases/tag/auto), download the zip file, and run the executable inside. Only Windows is supported - this will change eventually.**
 
 There's currently an issue where various antiviruses falsely flag Temporal Thievery as a virus. I can confirm it is not, and if you do not believe me then you can look at the source code and the workflow that generated the executable yourself, or scan the files with [VirusTotal](https://www.virustotal.com).
