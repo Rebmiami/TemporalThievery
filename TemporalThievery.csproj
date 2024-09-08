@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -35,9 +35,9 @@
     <Reference Include="System.Windows.Forms">
       <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Windows.Forms.dll</HintPath>
     </Reference>
-    <Reference Include="Trireme">
-      <HintPath>..\Trireme\bin\Debug\net6.0\Trireme.dll</HintPath>
-    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Trireme/Trireme/Trireme.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Puzzles\**">
