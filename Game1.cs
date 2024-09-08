@@ -61,8 +61,8 @@ namespace TemporalThievery
 
 
 			root = new RendererRoot(GraphicsDevice, Content);
-			string xml = File.ReadAllText("./Demos/Demo1.xml");
-			root.LoadXML(xml);
+			// string xml = File.ReadAllText("./Demos/Demo1.xml");
+			// root.LoadXML(xml);
 
 			// TODO: use this.Content to load your game content here
 		}
