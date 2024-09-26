@@ -1,4 +1,4 @@
-﻿#define WINFORMS
+﻿// #define WINFORMS
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,11 +16,14 @@ using TemporalThievery.Gameplay;
 using TemporalThievery.Input;
 using TemporalThievery.Loading;
 using TemporalThievery.Scenes;
+using TemporalThievery.Utils;
 
 namespace TemporalThievery.PuzzleEditor
 {
 	internal class EditorScene : Scene
 	{
+		FileBrowserScene puzzleSelectorScene;
+
 		EditorState state = EditorState.Load;
 		PuzzleState editingState;
 		// PuzzleState testingState;
@@ -33,6 +36,11 @@ namespace TemporalThievery.PuzzleEditor
 
 		bool wasDragging;
 		Element draggingElement;
+
+		public EditorScene()
+		{
+			puzzleSelectorScene = new FileBrowserScene(new FileBrowser("./Puzzles", false, ".json"));
+		}
 
 		/// <summary>
 		/// Initializes the puzzle into editing mode after loading a puzzle
@@ -98,6 +106,19 @@ namespace TemporalThievery.PuzzleEditor
 							}
 						}
 					}
+#else
+					puzzleSelectorScene.Update(gameTime);
+					if (puzzleSelectorScene.finished)
+					{
+						string filePath = puzzleSelectorScene.chosenFilePath;
+
+						string json = File.ReadAllText(filePath);
+						PuzzleTemplate puzzleLoader = JsonSerializer.Deserialize<PuzzleTemplate>(json);
+						editingState = puzzleLoader.ToPuzzle();
+
+						Initialize();
+					}
+
 #endif
 					break;
 				case EditorState.Edit:
@@ -219,11 +240,17 @@ namespace TemporalThievery.PuzzleEditor
 			{
 				case EditorState.Load:
 					spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-					
+#if WINFORMS
 					spriteBatch.DrawString(Game1.TestFont, "The best part of Temporal Thievery was when he said it's Editing Time and then he edited all over those guys", new Vector2(), Color.White);
 					spriteBatch.DrawString(Game1.TestFont, "Press ~ to load a puzzle for editing", new Vector2(0, 10), Color.White);
-
 					spriteBatch.End();
+#else
+
+					spriteBatch.DrawString(Game1.TestFont, "The best part of Temporal Thievery was when he said it's Editing Time and then he edited all over those guys", new Vector2(), Color.White);
+					spriteBatch.End();
+					// File browser scene starts its own spritebatch
+					puzzleSelectorScene.Draw(gameTime, graphicsDevice, spriteBatch, renderTarget);
+#endif
 					break;
 
 				case EditorState.Edit:

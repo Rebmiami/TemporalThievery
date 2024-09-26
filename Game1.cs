@@ -62,6 +62,7 @@ namespace TemporalThievery
 
 
 		public static Scene activeScene;
+		public static Scene backgroundScene;
 
 		protected override void Update(GameTime gameTime)
 		{

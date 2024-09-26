@@ -1,4 +1,4 @@
-﻿#define WINFORMS
+﻿// #define WINFORMS
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,10 +21,17 @@ namespace TemporalThievery.Gameplay
 {
 	public class PuzzleScene : Scene
 	{
+		FileBrowserScene puzzleSelectorScene;
+		bool choosingPuzzle = false;
+		string lastChosenPathFolder = "";
+
+
 		public PuzzleState puzzle;
 		public CommandManager manager;
 		public string puzzlePath;
 		public bool editorContext;
+
+
 
 		public PuzzleScene()
 		{
@@ -79,6 +86,27 @@ namespace TemporalThievery.Gameplay
 							}
 						}
 					}
+				}
+#else
+				if (KeyHelper.Pressed(Keys.OemTilde))
+				{
+					choosingPuzzle = true;
+					puzzleSelectorScene = new FileBrowserScene(new FileBrowser("./Puzzles", true, ".json"));
+					if (lastChosenPathFolder != "")
+					{
+						puzzleSelectorScene.browser.SetCurrentDir(lastChosenPathFolder);
+					}
+				}
+				if (choosingPuzzle)
+				{
+					puzzleSelectorScene.Update(gameTime);
+					if (puzzleSelectorScene.finished)
+					{
+						lastChosenPathFolder = puzzleSelectorScene.browser.GetCurrentDir();
+						InitializePuzzleFromFilePath(puzzleSelectorScene.chosenFilePath);
+						choosingPuzzle = false;
+					}
+					return;
 				}
 #endif
 				if (KeyHelper.Pressed(Keys.R))
@@ -168,6 +196,12 @@ namespace TemporalThievery.Gameplay
 
 		public override void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget)
 		{
+			if (choosingPuzzle)
+			{
+				puzzleSelectorScene.Draw(gameTime, graphicsDevice, spriteBatch, renderTarget);
+				return;
+			}
+
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
 
 			spriteBatch.DrawString(Game1.TestFont, puzzle.Name, new Vector2(50, 0), Color.White);
