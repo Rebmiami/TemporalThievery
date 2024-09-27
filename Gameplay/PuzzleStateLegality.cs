@@ -52,7 +52,7 @@ namespace TemporalThievery
 		TooManyTimelines,
 
 		/// <summary>
-		/// The move attempted will put the player in the line of sight of a detector laser.
+		/// The move attempted cannot be performed because the player is in the line of sight of a detector laser.
 		/// </summary>
 		Caught,
 

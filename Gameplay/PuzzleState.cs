@@ -109,7 +109,18 @@ namespace TemporalThievery.Gameplay
 
 		public PuzzleStateLegality GetLegality(Stack<IDelta> deltas)
 		{
+			// PlayerDelta is the most important delta, so find the player delta so it can be used later
+			// Should it be passed separately?
 
+			// Not all commands produce PlayerDeltas, so this is null by default
+			PlayerDelta playerDelta = null;
+			foreach (IDelta delta in deltas)
+			{
+				if (delta is PlayerDelta found)
+				{
+					playerDelta = found;
+				}
+			}
 
 			if (Timelines.Count == 0)
 			{
@@ -129,13 +140,35 @@ namespace TemporalThievery.Gameplay
 			{
 				return PuzzleStateLegality.PlayerInWall;
 			}
-			if (playerTimeline.Layout[Player.Position.X, Player.Position.Y] == 2)
+
+			if (playerDelta != null)
 			{
-				foreach (IDelta delta in deltas)
+				if (playerTimeline.Layout[Player.Position.X, Player.Position.Y] == 2)
 				{
-					if (delta is PlayerDelta playerDelta && playerDelta.newTimeline != playerDelta.oldTimeline)
+					if (playerDelta.newTimeline != playerDelta.oldTimeline)
 					{
 						return PuzzleStateLegality.Grate;
+					}
+				}
+
+				// Check if the player is caught within a laser trap
+				// Can escape a laser trap by moving to another timeline
+				if (playerDelta.newTimeline == playerDelta.oldTimeline)
+				{
+					foreach (Element element in playerTimeline.Elements)
+					{
+						if (element.Type == "Laser")
+						{
+							for (int i = 0; i < element.LaserLength; i++)
+							{
+								Point laserPoint = element.Position + DirectionHelper.ToPoint(element.Direction) * new Point(i);
+								if (laserPoint == playerDelta.oldPosition)
+								{
+									// Stop! You have violated the law!
+									return PuzzleStateLegality.Caught;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -169,7 +202,7 @@ namespace TemporalThievery.Gameplay
 					{
 						foreach (IDelta delta in deltas)
 						{
-							if (delta is PlayerDelta playerDelta 
+							if (delta is PlayerDelta //playerDelta 
 								&& element.Position == Player.Position
 								&& playerDelta.direction == DirectionHelper.Invert((Directions)element.Direction))
 							{
@@ -183,18 +216,6 @@ namespace TemporalThievery.Gameplay
 							}
 						}
 					}
-					if (timeline == playerTimeline && element.Type == "Laser")
-					{
-						for (int i = 0; i < element.LaserLength; i++)
-						{
-							Point laserPoint = element.Position + DirectionHelper.ToPoint(element.Direction) * new Point(i);
-							if (laserPoint == Player.Position)
-							{
-								return PuzzleStateLegality.Caught;
-							}
-
-						}
-					}
 				}
 				if (timeline == playerTimeline)
 				{
@@ -205,6 +226,7 @@ namespace TemporalThievery.Gameplay
 				}
 			}
 
+			// Innocent until proven guilty
 			return PuzzleStateLegality.Legal;
 		}
 

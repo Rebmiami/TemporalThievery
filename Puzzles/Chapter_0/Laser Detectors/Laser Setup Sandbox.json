@@ -2,10 +2,10 @@
 	"Name": "Laser Setup Sandbox",
 
 	"CashGoal": 1,
-	"MaxTimeline": 1,
-	"Jump": 0,
-	"Branch": 0,
-	"Kill": 0,
+	"MaxTimeline": 3,
+	"Jump": -1,
+	"Branch": -1,
+	"Kill": -1,
 	"Return": 0,
 
 	"Theme": "Test",
