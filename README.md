@@ -8,7 +8,17 @@ Rob your way through the wild west, modern banks, top-secret government faciliti
 - [How to play Temporal Thievery](#how-to-play-temporal-thievery)
 
 ### How to compile Temporal Thievery
-In order to compile the game, you will need to install MonoGame and .NET 8.0. If use VSCode, the project settings should allow you to simply press F5 to run the game on Windows and Linux (other platforms and IDEs not yet tested). Otherwise, you can use `dotnet build` to build the project from the command line.
+In order to compile the game, you will need to install MonoGame and .NET 8.0 and 3.1. If you use VSCode, the project settings should allow you to simply press F5 to run the game on Windows and Linux (other platforms and IDEs not yet tested). Otherwise, you can use `dotnet build` to build the project from the command line.
+
+On Ubuntu and related distros, I would recommend obtaining the .NET SDKs directly from Microsoft's website. Select the binaries that match your architecture, download the .deb package, and follow Microsoft's instructions on the following page to install the SDKs.
+
+- .NET 8.0: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+- .NET 3.1: https://dotnet.microsoft.com/en-us/download/dotnet/3.1
+
+You may also need to install libssl1.1 and Arial.
+
+- [How to install libssl1.1](https://gist.github.com/joulgs/c8a85bb462f48ffc2044dd878ecaa786)
+- [How to install Arial](https://askubuntu.com/questions/651441/how-to-install-arial-font-and-other-windows-fonts-in-ubuntu)
 
 Additionally, the `trireme` branch requires access to the Trireme library, which is incomplete and has not yet been released as of the writing of this document.
 
