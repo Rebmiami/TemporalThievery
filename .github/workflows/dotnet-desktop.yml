@@ -125,12 +125,12 @@ jobs:
 
     # Upload artifact
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: TemporalThievery_${{ matrix.configuration }}
         path: D:/a/TemporalThievery/TemporalThievery/bin/${{ matrix.configuration }}/net8.0-windows\win-x64
         
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: TemporalThievery_${{ matrix.configuration }}
         path: D:/a/Archive_${{ matrix.configuration }}
