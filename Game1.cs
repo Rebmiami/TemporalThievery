@@ -74,11 +74,11 @@ namespace TemporalThievery
 			string xml = File.ReadAllText("./Trireme/GameScene.xml");
 			root.LoadXML(xml);
 
-			root.rootLayer.transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-			root.GetLayerByID("hud").transformation.scale = new Vector2(2);
-			root.GetLayerByID("hud").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 50);
-			root.GetLayerByID("game").transformation.scale = new Vector2(2);
-			root.GetLayerByID("game").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 50);
+			root.rootLayer.transformation.scale = new Vector2(2);
+			root.rootLayer.transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+			root.GetLayerByID("hud").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 25);
+			root.GetLayerByID("game").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 25);
+			root.GetLayerByID("game").transformation.position.Y = 25;
 
 			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawPuzzle;
 		}

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <recursive id="root">
-  <recursive id="hud" height="50">
+  <recursive id="hud">
     <sprite id="logo" source="TTLogo" />
   </recursive>
-  <manual id="game" y="50" />
+  <manual id="game"/>
 </recursive>
