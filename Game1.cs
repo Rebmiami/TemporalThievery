@@ -13,6 +13,8 @@ using TemporalThievery.Scenes;
 using TemporalThievery.Gameplay;
 using TemporalThievery.PuzzleEditor;
 using Trireme;
+using System;
+using System.Diagnostics;
 
 namespace TemporalThievery
 {
@@ -47,6 +49,13 @@ namespace TemporalThievery
 
 		public static List<Color> colors;
 
+		public GameTime gameTime;
+
+		public void DrawPuzzle(object sender, EventArgs args)
+		{
+			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch);
+		}
+
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -61,10 +70,17 @@ namespace TemporalThievery
 
 
 			root = new RendererRoot(GraphicsDevice, Content);
-			// string xml = File.ReadAllText("./Demos/Demo1.xml");
-			// root.LoadXML(xml);
 
-			// TODO: use this.Content to load your game content here
+			string xml = File.ReadAllText("./Trireme/GameScene.xml");
+			root.LoadXML(xml);
+
+			root.rootLayer.transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+			root.GetLayerByID("hud").transformation.scale = new Vector2(2);
+			root.GetLayerByID("hud").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 50);
+			root.GetLayerByID("game").transformation.scale = new Vector2(2);
+			root.GetLayerByID("game").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 50);
+
+			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawPuzzle;
 		}
 
 
@@ -92,24 +108,9 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
-			// root.Draw();
+			this.gameTime = gameTime;
 
-			// TODO: Create a dedicated class for drawing timelines properly
-			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
-			GraphicsDevice.SetRenderTarget(renderTarget);
-			GraphicsDevice.Clear(new Color(20, 20, 20));
-
-			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch, renderTarget);
-
-			Program.game.GraphicsDevice.SetRenderTarget(null);
-
-			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0.0f);
-			spriteBatch.End();
-
-			renderTarget.Dispose();
-
-			base.Draw(gameTime);
+			root.Draw();
 		}
 	}
 }

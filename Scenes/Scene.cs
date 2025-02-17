@@ -15,7 +15,7 @@ namespace TemporalThievery.Scenes
 
 		}
 
-		public virtual void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget)
+		public virtual void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget = null)
 		{
 			
 		}
