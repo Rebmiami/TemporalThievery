@@ -27,6 +27,15 @@ namespace TemporalThievery
 		public Game1()
 		{
 			_graphics = new GraphicsDeviceManager(this);
+
+			// Setup up the default resolution for the project
+			Point resolution = Window.ClientBounds.Size;
+    		_graphics.PreferredBackBufferWidth = resolution.X;
+    		_graphics.PreferredBackBufferHeight = resolution.Y;
+
+    		// Runs the game in "full Screen" mode using the set resolution
+    		_graphics.IsFullScreen = true;
+
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 		}
@@ -56,6 +65,23 @@ namespace TemporalThievery
 			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch);
 		}
 
+		public void UpdateViewport(object sender, EventArgs eventArgs)
+    	{
+    	    Layer rootLayer = root.rootLayer;
+
+			// float scale = 2f;
+			Vector2 idealScale = GraphicsDevice.Viewport.Bounds.Size.ToVector2() / rootLayer.Bounds.ToVector2();
+			float scale = Math.Min(idealScale.X, idealScale.Y);
+			scale = (float)Math.Floor(scale);
+
+			rootLayer.transformation.scale = new Vector2(scale);
+			int vRes = 360;
+			float aspectRatio = 4f / 3f;
+			rootLayer.Bounds = new Point((int)(vRes * aspectRatio), vRes);
+
+			rootLayer.transformation.position = (GraphicsDevice.Viewport.Bounds.Size.ToVector2() - rootLayer.Bounds.ToVector2() * scale) / 2;
+    	}
+
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -70,14 +96,23 @@ namespace TemporalThievery
 
 
 			root = new RendererRoot(GraphicsDevice, Content);
+			root.backgroundColor = new Color(40, 40, 40);
 
 			string xml = File.ReadAllText("./Trireme/GameScene.xml");
 			root.LoadXML(xml);
 
-			root.rootLayer.transformation.scale = new Vector2(2);
-			root.rootLayer.transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
-			root.GetLayerByID("hud").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 25);
-			root.GetLayerByID("game").transformation.sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 25);
+        	Window.AllowUserResizing = true;
+			Window.ClientSizeChanged += UpdateViewport;
+			
+
+			Layer rootLayer = root.rootLayer;
+
+			UpdateViewport(null, null);
+
+			(rootLayer as RecursiveLayer).backgroundColor = new Color(20, 20, 20);
+
+			(root.GetLayerByID("hud") as BufferLayer).sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 25);
+			(root.GetLayerByID("game") as BufferLayer).sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 25);
 			root.GetLayerByID("game").transformation.position.Y = 25;
 
 			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawPuzzle;

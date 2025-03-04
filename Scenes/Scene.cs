@@ -10,6 +10,11 @@ namespace TemporalThievery.Scenes
 {
 	public abstract class Scene
 	{
+		public virtual void Initialize()
+		{
+			
+		}
+
 		public virtual void Update(GameTime gameTime)
 		{
 
