@@ -78,8 +78,8 @@ namespace TemporalThievery
 			int vRes = 360;
 			float aspectRatio = 4f / 3f;
 			rootLayer.Bounds = new Point((int)(vRes * aspectRatio), vRes);
-
-			rootLayer.transformation.position = (GraphicsDevice.Viewport.Bounds.Size.ToVector2() - rootLayer.Bounds.ToVector2() * scale) / 2;
+			rootLayer.transformation.origin = rootLayer.Bounds.ToVector2() / 2;
+			rootLayer.transformation.position = GraphicsDevice.Viewport.Bounds.Size.ToVector2() / 2;
     	}
 
 		protected override void LoadContent()
