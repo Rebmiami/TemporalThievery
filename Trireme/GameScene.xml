@@ -1,7 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <recursive id="root">
-  <recursive id="hud">
-    <sprite id="logo" source="TTLogo" />
-  </recursive>
   <manual id="game"/>
 </recursive>

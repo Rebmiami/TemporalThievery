@@ -204,33 +204,70 @@ namespace TemporalThievery.Gameplay
 
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Name, new Vector2(50, 0), Color.White);
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 10), new Rectangle(0, 0 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Jumps.ToString(), new Vector2(24, 10), Color.White);
+			const bool demoMode = true;
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 25), new Rectangle(0, 1 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Branches.ToString(), new Vector2(24, 25), Color.White);
+			if (demoMode)
+			{
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(85, 4), new Rectangle(0, 5 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.CollectedCash + "/" + puzzle.CashGoal.ToString(), new Vector2(100, 2),
+					puzzle.CollectedCash < puzzle.CashGoal ? Color.White : Color.Green);
+			}
+			else
+			{	
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Name, new Vector2(50, 0), Color.White);
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 40), new Rectangle(0, 2 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Kills.ToString(), new Vector2(24, 40), Color.White);
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 10), new Rectangle(0, 0 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Jumps.ToString(), new Vector2(24, 10), Color.White);
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 55), new Rectangle(0, 3 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Returns.ToString(), new Vector2(24, 55), Color.White);
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 25), new Rectangle(0, 1 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Branches.ToString(), new Vector2(24, 25), Color.White);
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 80), new Rectangle(0, 4 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.Timelines.Count + "/" + puzzle.MaxTimeline.ToString(), new Vector2(24, 80), 
-				puzzle.Timelines.Count < puzzle.MaxTimeline ? Color.White : Color.Red);
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 40), new Rectangle(0, 2 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Kills.ToString(), new Vector2(24, 40), Color.White);
 
-			spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 95), new Rectangle(0, 5 * 12, 15, 12), Color.White);
-			spriteBatch.DrawString(Game1.TestFont, puzzle.CollectedCash + "/" + puzzle.CashGoal.ToString(), new Vector2(24, 95),
-				puzzle.CollectedCash < puzzle.CashGoal ? Color.White : Color.Green);
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 55), new Rectangle(0, 3 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Returns.ToString(), new Vector2(24, 55), Color.White);
 
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 80), new Rectangle(0, 4 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.Timelines.Count + "/" + puzzle.MaxTimeline.ToString(), new Vector2(24, 80), 
+					puzzle.Timelines.Count < puzzle.MaxTimeline ? Color.White : Color.Red);
 
+				spriteBatch.Draw(Game1.HUDIcons, new Vector2(4, 95), new Rectangle(0, 5 * 12, 15, 12), Color.White);
+				spriteBatch.DrawString(Game1.TestFont, puzzle.CollectedCash + "/" + puzzle.CashGoal.ToString(), new Vector2(24, 95),
+					puzzle.CollectedCash < puzzle.CashGoal ? Color.White : Color.Green);
+			}
 
+			
+			int timelineTileSize = 8;
 
+			bool specialJumpMode = KeyHelper.Down(Keys.X) && puzzle.Timelines.Count > 2;
+			Vector2 origin = renderTarget.Bounds.Size.ToVector2() / 2;
+			for (int i = 0; i < puzzle.Timelines.Count; i++)
+			{
+				Timeline timeline = puzzle.Timelines[i];
 
-			puzzle.Draw(spriteBatch);
+				Vector2 timelineCenter = timeline.Dimensions.ToVector2() / 2 * timelineTileSize;
+
+				timeline.DrawDebug(spriteBatch, origin - timelineCenter);
+
+				if (puzzle.Timelines[puzzle.Player.Timeline] == timeline)
+                {
+					spriteBatch.Draw(Game1.GameTilesDebug, origin - timelineCenter + new Vector2(puzzle.Player.Position.X * timelineTileSize, puzzle.Player.Position.Y * timelineTileSize), new Rectangle((timelineTileSize + 1) * 2, (timelineTileSize + 1) * 0, timelineTileSize, timelineTileSize), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+				}
+				else if (specialJumpMode)
+				{
+					spriteBatch.DrawString(Game1.TestFont, (i + 1).ToString(), origin + new Vector2(timeline.Dimensions.X * timelineTileSize + 3, 0), Color.White);
+				}
+
+				origin.Y += timeline.Dimensions.Y * 8 + 16;
+				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
+				{
+					origin.Y = 15;
+					origin.X += timeline.Dimensions.X * 8 + 16;
+				}
+			}
+
 			spriteBatch.End();
 			base.Draw(gameTime, graphicsDevice, spriteBatch, renderTarget);
 		}

@@ -37,7 +37,7 @@ namespace TemporalThievery
     		_graphics.IsFullScreen = true;
 
 			Content.RootDirectory = "Content";
-			IsMouseVisible = true;
+			IsMouseVisible = false;
 		}
 
 		protected override void Initialize()
@@ -60,9 +60,9 @@ namespace TemporalThievery
 
 		public GameTime gameTime;
 
-		public void DrawPuzzle(object sender, EventArgs args)
+		public void DrawScene(object sender, EventArgs args)
 		{
-			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch);
+			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch, (sender as BufferLayer).Buffer as RenderTarget2D);
 		}
 
 		public void UpdateViewport(object sender, EventArgs eventArgs)
@@ -75,11 +75,13 @@ namespace TemporalThievery
 			scale = (float)Math.Floor(scale);
 
 			rootLayer.transformation.scale = new Vector2(scale);
-			int vRes = 360;
+			int vRes = 144;
 			float aspectRatio = 4f / 3f;
 			rootLayer.Bounds = new Point((int)(vRes * aspectRatio), vRes);
 			rootLayer.transformation.origin = rootLayer.Bounds.ToVector2() / 2;
 			rootLayer.transformation.position = GraphicsDevice.Viewport.Bounds.Size.ToVector2() / 2;
+
+			(root.GetLayerByID("game") as BufferLayer).Bounds = rootLayer.Bounds;
     	}
 
 		protected override void LoadContent()
@@ -94,28 +96,20 @@ namespace TemporalThievery
 			string json = File.ReadAllText("./Data/Colors.json");
 			colors = JsonSerializer.Deserialize<List<Color>>(json);
 
-
 			root = new RendererRoot(GraphicsDevice, Content);
 			root.backgroundColor = new Color(40, 40, 40);
 
 			string xml = File.ReadAllText("./Trireme/GameScene.xml");
 			root.LoadXML(xml);
-
-        	Window.AllowUserResizing = true;
-			Window.ClientSizeChanged += UpdateViewport;
 			
-
 			Layer rootLayer = root.rootLayer;
-
 			UpdateViewport(null, null);
 
 			(rootLayer as RecursiveLayer).backgroundColor = new Color(20, 20, 20);
+			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawScene;
 
-			(root.GetLayerByID("hud") as BufferLayer).sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, 25);
-			(root.GetLayerByID("game") as BufferLayer).sourceRectangle = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - 25);
-			root.GetLayerByID("game").transformation.position.Y = 25;
-
-			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawPuzzle;
+        	Window.AllowUserResizing = true;
+			Window.ClientSizeChanged += UpdateViewport;
 		}
 
 
