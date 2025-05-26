@@ -14,35 +14,35 @@
 			"Elements": [
 				{
 					"Type": "MoneyBag",
-					"Position": [ 6, 1 ]
+					"Position": [ 6, 3 ]
 				},
 				{
 					"Type": "Pad",
-					"Position": [ 0, 1 ],
+					"Position": [ 3, 3 ],
 					"Channel": 0
 				},
 				{
 					"Type": "Gate",
-					"Position": [ 4, 1 ],
+					"Position": [ 4, 3 ],
 					"Toggle": false,
 					"Channel": 0
 				},
 				{
 					"Type": "Crate",
-					"Position": [ 2, 1 ]
+					"Position": [ 2, 3 ]
 				}
 			],
 			"Layout": [
-				[ 0, 1, 1, 1, 0, 1, 1, 1 ],
-				[ 1, 1, 1, 1, 1, 1, 1, 1 ],
-				[ 0, 1, 1, 1, 0, 1, 1, 1 ],
 				[ 0, 1, 1, 1, 0, 0, 0, 0 ],
-				[ 0, 1, 1, 1, 0, 0, 0, 0 ]
+				[ 0, 1, 1, 1, 0, 0, 0, 0 ],
+				[ 1, 1, 1, 1, 0, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 0, 1, 1, 1 ]
 			]
 		}
 	],
 	"Player": {
 		"Timeline": 0,
-		"Position": [ 2, 3 ]
+		"Position": [ 2, 1 ]
 	}
 }

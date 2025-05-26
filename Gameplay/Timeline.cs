@@ -172,7 +172,7 @@ namespace TemporalThievery.Gameplay
 					{
 						int channel = element.Channel;
 						bool open = Channels[channel] ^ element.Toggle;
-						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Game1.colors[channel + 2], 0, Vector2.Zero, 1, SpriteEffects.None, 0.5f);
+						spriteBatch.Draw(Game1.GameTilesDebug, origin, new Rectangle(9 * (open ? 1 : 0), 9 * 2, 8, 8), Game1.colors[channel + 2], 0, Vector2.Zero, 1, SpriteEffects.None, 0.7f);
 						break;
 					}
 
