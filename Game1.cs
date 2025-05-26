@@ -12,6 +12,9 @@ using TemporalThievery.Utils;
 using TemporalThievery.Scenes;
 using TemporalThievery.Gameplay;
 using TemporalThievery.PuzzleEditor;
+using Trireme;
+using System;
+using System.Diagnostics;
 
 namespace TemporalThievery
 {
@@ -19,12 +22,22 @@ namespace TemporalThievery
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch spriteBatch;
+		private RendererRoot root;
 
 		public Game1()
 		{
 			_graphics = new GraphicsDeviceManager(this);
+
+			// Setup up the default resolution for the project
+			Point resolution = Window.ClientBounds.Size;
+    		_graphics.PreferredBackBufferWidth = resolution.X;
+    		_graphics.PreferredBackBufferHeight = resolution.Y;
+
+    		// Runs the game in "full Screen" mode using the set resolution
+    		_graphics.IsFullScreen = true;
+
 			Content.RootDirectory = "Content";
-			IsMouseVisible = true;
+			IsMouseVisible = false;
 		}
 
 		protected override void Initialize()
@@ -45,6 +58,32 @@ namespace TemporalThievery
 
 		public static List<Color> colors;
 
+		public GameTime gameTime;
+
+		public void DrawScene(object sender, EventArgs args)
+		{
+			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch, (sender as BufferLayer).Buffer as RenderTarget2D);
+		}
+
+		public void UpdateViewport(object sender, EventArgs eventArgs)
+    	{
+    	    Layer rootLayer = root.rootLayer;
+
+			// float scale = 2f;
+			Vector2 idealScale = GraphicsDevice.Viewport.Bounds.Size.ToVector2() / rootLayer.Bounds.ToVector2();
+			float scale = Math.Min(idealScale.X, idealScale.Y);
+			scale = (float)Math.Floor(scale);
+
+			rootLayer.transformation.scale = new Vector2(scale);
+			int vRes = 144;
+			float aspectRatio = 4f / 3f;
+			rootLayer.Bounds = new Point((int)(vRes * aspectRatio), vRes);
+			rootLayer.transformation.origin = rootLayer.Bounds.ToVector2() / 2;
+			rootLayer.transformation.position = GraphicsDevice.Viewport.Bounds.Size.ToVector2() / 2;
+
+			(root.GetLayerByID("game") as BufferLayer).Bounds = rootLayer.Bounds;
+    	}
+
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -57,7 +96,20 @@ namespace TemporalThievery
 			string json = File.ReadAllText("./Data/Colors.json");
 			colors = JsonSerializer.Deserialize<List<Color>>(json);
 
-			// TODO: use this.Content to load your game content here
+			root = new RendererRoot(GraphicsDevice, Content);
+			root.backgroundColor = new Color(40, 40, 40);
+
+			string xml = File.ReadAllText("./Trireme/GameScene.xml");
+			root.LoadXML(xml);
+			
+			Layer rootLayer = root.rootLayer;
+			UpdateViewport(null, null);
+
+			(rootLayer as RecursiveLayer).backgroundColor = new Color(20, 20, 20);
+			(root.GetLayerByID("game") as ManualLayer).ManualDrawEvent += DrawScene;
+
+        	Window.AllowUserResizing = true;
+			Window.ClientSizeChanged += UpdateViewport;
 		}
 
 
@@ -85,22 +137,9 @@ namespace TemporalThievery
 
 		protected override void Draw(GameTime gameTime)
 		{
-			// TODO: Create a dedicated class for drawing timelines properly
-			RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, Program.WindowBounds().Width, Program.WindowBounds().Height);
-			GraphicsDevice.SetRenderTarget(renderTarget);
-			GraphicsDevice.Clear(new Color(20, 20, 20));
+			this.gameTime = gameTime;
 
-			activeScene.Draw(gameTime, GraphicsDevice, spriteBatch, renderTarget);
-
-			Program.game.GraphicsDevice.SetRenderTarget(null);
-
-			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0.0f);
-			spriteBatch.End();
-
-			renderTarget.Dispose();
-
-			base.Draw(gameTime);
+			root.Draw();
 		}
 	}
 }

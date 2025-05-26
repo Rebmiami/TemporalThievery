@@ -73,30 +73,7 @@ namespace TemporalThievery.Gameplay
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			bool specialJumpMode = KeyHelper.Down(Keys.X) && Timelines.Count > 2;
-			Vector2 origin = new Vector2(60, 15);
-			for (int i = 0; i < Timelines.Count; i++)
-			{
-				Timeline timeline = Timelines[i];
-				timeline.DrawDebug(spriteBatch, origin);
-
-				if (Timelines[Player.Timeline] == timeline)
-                {
-					spriteBatch.Draw(Game1.GameTilesDebug, origin + new Vector2(Player.Position.X * 8, Player.Position.Y * 8), new Rectangle(9 * 2, 9 * 0, 8, 8), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
-				}
-				else if (specialJumpMode)
-				{
-					spriteBatch.DrawString(Game1.TestFont, (i + 1).ToString(), origin + new Vector2(timeline.Dimensions.X * 8 + 3, 0), Color.White);
-				}
-
-
-				origin.Y += timeline.Dimensions.Y * 8 + 16;
-				if (origin.Y + timeline.Dimensions.Y * 8 > 430 / 2)
-				{
-					origin.Y = 15;
-					origin.X += timeline.Dimensions.X * 8 + 16;
-				}
-			}
+			
 		}
 
 		public void Refresh()

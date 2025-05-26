@@ -44,6 +44,9 @@ namespace TemporalThievery.Commands
 
 			PuzzleStateLegality legality = tempPuzzle.GetLegality(command.deltas);
 
+			// Allow all moves:
+			// legality = PuzzleStateLegality.Legal;
+
 			if (legality == PuzzleStateLegality.Legal)
 			{
 				command.deltas.Clear();

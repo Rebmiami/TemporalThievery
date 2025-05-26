@@ -10,12 +10,17 @@ namespace TemporalThievery.Scenes
 {
 	public abstract class Scene
 	{
+		public virtual void Initialize()
+		{
+			
+		}
+
 		public virtual void Update(GameTime gameTime)
 		{
 
 		}
 
-		public virtual void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget)
+		public virtual void Draw(GameTime gameTime, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, RenderTarget2D renderTarget = null)
 		{
 			
 		}

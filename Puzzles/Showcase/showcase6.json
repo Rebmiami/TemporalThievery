@@ -1,0 +1,48 @@
+{
+	"Name": "Moneybags",
+
+	"CashGoal": 1,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "MoneyBag",
+					"Position": [ 6, 3 ]
+				},
+				{
+					"Type": "Pad",
+					"Position": [ 3, 3 ],
+					"Channel": 0
+				},
+				{
+					"Type": "Gate",
+					"Position": [ 4, 3 ],
+					"Toggle": false,
+					"Channel": 0
+				},
+				{
+					"Type": "Crate",
+					"Position": [ 2, 3 ]
+				}
+			],
+			"Layout": [
+				[ 0, 1, 1, 1, 0, 0, 0, 0 ],
+				[ 0, 1, 1, 1, 0, 0, 0, 0 ],
+				[ 1, 1, 1, 1, 0, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 1, 1, 1, 1 ],
+				[ 1, 1, 1, 1, 0, 1, 1, 1 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 2, 1 ]
+	}
+}
