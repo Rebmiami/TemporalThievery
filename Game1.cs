@@ -95,7 +95,7 @@ namespace TemporalThievery
 			Program.game.GraphicsDevice.SetRenderTarget(null);
 
 			spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp);
-			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 2, SpriteEffects.None, 0.0f);
+			spriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 4, SpriteEffects.None, 0.0f);
 			spriteBatch.End();
 
 			renderTarget.Dispose();

@@ -1,0 +1,33 @@
+{
+	"Name": "???",
+
+	"CashGoal": 0,
+	"MaxTimeline": 1,
+	"Jump": 0,
+	"Branch": 0,
+	"Kill": 0,
+	"Return": 0,
+
+	"Theme": "Test",
+	"Timelines": [
+		{
+			"Elements": [
+				{
+					"Type": "LoadingZone",
+					"Position": [ 6, 1 ],
+					"Destination": "Puzzles/Chapter_0/Overworld/overworld1.json",
+					"DestinationPosition": [ 1, 4 ]
+				}
+			],
+			"Layout": [
+				[ 0, 0, 1, 1, 1, 0, 0 ],
+				[ 0, 0, 1, 1, 1, 1, 1 ],
+				[ 0, 0, 1, 1, 1, 0, 0 ]
+			]
+		}
+	],
+	"Player": {
+		"Timeline": 0,
+		"Position": [ 3, 1 ]
+	}
+}

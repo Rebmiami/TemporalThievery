@@ -51,6 +51,10 @@ namespace TemporalThievery.Loading
 
 				public byte BindChannel { get; set; }
 
+				public string Destination { get; set; }
+
+				public int[] DestinationPosition { get; set; }
+
 
 				public Element ToElement()
 				{
@@ -61,8 +65,13 @@ namespace TemporalThievery.Loading
 						Channel = Channel,
 						Toggle = Toggle,
 						Direction = Direction,
-						BindChannel = BindChannel
+						BindChannel = BindChannel,
+						Destination = Destination,
 					};
+					if (DestinationPosition != null)
+					{
+						element.DestinationPosition = new Point(DestinationPosition[0], DestinationPosition[1]);
+					}
 					return element;
 				}
 			}

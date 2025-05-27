@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Microsoft.Xna.Framework;
 using TemporalThievery.Commands.Deltas;
 using TemporalThievery.Gameplay;
 
@@ -60,6 +61,16 @@ namespace TemporalThievery.Commands
 				commands.Push(command);
 
 				puzzle.Refresh();
+
+				// Check for loading zones
+				int loadingZone = puzzle.Timelines[puzzle.Player.Timeline].GetFirstElementAtPoint(puzzle.Player.Position, "LoadingZone");
+				if (loadingZone != -1)
+				{
+					string destination = puzzle.Timelines[puzzle.Player.Timeline].Elements[loadingZone].Destination;
+					Point destinationPosition = puzzle.Timelines[puzzle.Player.Timeline].Elements[loadingZone].DestinationPosition;
+					(Game1.activeScene as PuzzleScene).InitializePuzzleFromFilePath(destination);
+					(Game1.activeScene as PuzzleScene).puzzle.Player.Position = destinationPosition;
+				}
 			}
 			else
 			{

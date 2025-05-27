@@ -47,6 +47,16 @@ namespace TemporalThievery
 		/// </summary>
 		public int LaserLength;
 
+		/// <summary>
+		/// Used by overworld loading zones and puzzle entrances. Indicates the puzzle to load when this element is interacted with.
+		/// </summary>
+		public string Destination { get; set; }
+
+		/// <summary>
+		/// Used by overworld loading zones. Indicates where the player should appear in the destination puzzle.
+		/// </summary>
+		public Point DestinationPosition { get; set; }
+
 		public object Clone()
 		{
 			return new Element
@@ -57,7 +67,9 @@ namespace TemporalThievery
 				Toggle = Toggle,
 				Direction = Direction,
 				BindChannel = BindChannel,
-				LaserLength = LaserLength
+				LaserLength = LaserLength,
+				Destination = Destination,
+				DestinationPosition = DestinationPosition
 			};
 		}
 

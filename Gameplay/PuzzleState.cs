@@ -232,14 +232,14 @@ namespace TemporalThievery.Gameplay
 
 		public CollectDelta CheckPlayerOverlappingMoney()
 		{
-			int moneyBag = Timelines[Player.Timeline].GetMoneyBag(Player.Position);
+			int moneyBag = Timelines[Player.Timeline].GetFirstElementAtPoint(Player.Position, "MoneyBag");
 			if (moneyBag >= 0)
 			{
 				return new CollectDelta(this, Player.Timeline, moneyBag);
 			}
 			return null;
 		}
-
+		
 		public object Clone()
 		{
 			PuzzleState puzzleState = new PuzzleState

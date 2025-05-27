@@ -309,6 +309,8 @@ namespace TemporalThievery.Gameplay
 			return x >= 0 && y >= 0 && x < Dimensions.X && y < Dimensions.Y;
 		}
 
+		public Element GetPushable(int x, int y) => GetPushable(new Point(x, y));
+
 		public Element GetPushable(Point point)
 		{
 			foreach (Element element in Elements)
@@ -321,21 +323,18 @@ namespace TemporalThievery.Gameplay
 			return null;
 		}
 
-		public int GetMoneyBag(Point point)
+		public int GetFirstElementAtPoint(Point point, string type)
 		{
 			for (int i = 0; i < Elements.Count; i++)
 			{
 				Element element = Elements[i];
-				if (element.Position == point && element.Type == "MoneyBag")
+				if (element.Position == point && element.Type == type)
 				{
 					return i;
 				}
 			}
 			return -1;
 		}
-
-		public Element GetPushable(int x, int y) => GetPushable(new Point(x, y));
-
 
 		public object Clone()
 		{
